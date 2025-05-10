@@ -6,17 +6,15 @@ const DashboardLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <html lang="en">
-      <body>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <AppHeader />
-            <main className="p-4">{children}</main>
-          </SidebarInset>
-        </SidebarProvider>
-      </body>
-    </html>
+    <div className="">
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <AppHeader />
+          <main className="p-4">{children}</main>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
   );
 };
 
