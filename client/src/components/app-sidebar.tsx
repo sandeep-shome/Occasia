@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ChevronRight } from "lucide-react";
-import { VersionSwitcher } from "@/components/version-switcher";
 import {
   Collapsible,
   CollapsibleContent,
@@ -9,6 +8,7 @@ import {
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -18,6 +18,19 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "@/assets/logo.svg";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Progress } from "./ui/progress";
 
 // This is sample data.
 const data = {
@@ -67,10 +80,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
+        <div className="w-full flex items-center justify-between px-2 py-2">
+          <Link href={"/"}>
+            <Image src={logo} alt="logo" width={90} />
+          </Link>
+        </div>
       </SidebarHeader>
       <SidebarContent className="gap-0">
         {/* We create a collapsible SidebarGroup for each parent. */}
@@ -108,6 +122,34 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </Collapsible>
         ))}
       </SidebarContent>
+      <SidebarFooter>
+        <Card className="shadow-none">
+          <form>
+            <CardHeader className="p-4 pb-0">
+              <CardTitle className="text-sm">
+                Subscribe to our newsletter
+              </CardTitle>
+              <CardDescription>
+                Opt-in to receive updates and news about the sidebar.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-2.5 p-4">
+              <div className="flex items-center gap-2">
+                <Progress max={10} value={5} />
+                <p className="flex items-center text-xs">
+                  <span>5</span> / <span>10</span>
+                </p>
+              </div>
+              <Button
+                className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
+                size="sm"
+              >
+                Upgrade
+              </Button>
+            </CardContent>
+          </form>
+        </Card>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
