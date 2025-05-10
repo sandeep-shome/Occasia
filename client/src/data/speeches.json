@@ -4,18 +4,18 @@
     "speechs": [
       {
         "name": "Wedding Speech",
-        "public_promt": "Generate a heartfelt wedding speech for my best friend, keep it emotional and engaging.",
-        "internal_promt": "Write a touching, emotional, and well-structured wedding speech that expresses love, friendship, and best wishes for the newlyweds. Keep it sincere, uplifting, and suitable for delivery in front of family and friends."
+        "public_prompt": "Generate a heartfelt wedding speech for my best friend, keep it emotional and engaging.",
+        "internal_prompt": "Write a touching, emotional, and well-structured wedding speech that expresses love, friendship, and best wishes for the newlyweds. Keep it sincere, uplifting, and suitable for delivery in front of family and friends."
       },
       {
         "name": "Birthday Speech",
-        "public_promt": "Create a fun and emotional birthday speech for my sister.",
-        "internal_promt": "Generate a warm, cheerful, and affectionate birthday speech that celebrates the sister's personality, memories shared, and heartfelt wishes for the future."
+        "public_prompt": "Create a fun and emotional birthday speech for my sister.",
+        "internal_prompt": "Generate a warm, cheerful, and affectionate birthday speech that celebrates the sister's personality, memories shared, and heartfelt wishes for the future."
       },
       {
         "name": "Farewell Speech",
-        "public_promt": "Make a farewell speech for my colleague who is retiring.",
-        "internal_promt": "Generate a respectful and emotionally resonant farewell speech appreciating the colleague's contributions, sharing fond memories, and wishing them well in their next chapter."
+        "public_prompt": "Make a farewell speech for my colleague who is retiring.",
+        "internal_prompt": "Generate a respectful and emotionally resonant farewell speech appreciating the colleague's contributions, sharing fond memories, and wishing them well in their next chapter."
       }
     ]
   },
@@ -24,18 +24,18 @@
     "speechs": [
       {
         "name": "Job Interview Intro Speech",
-        "public_promt": "Write a brief self-introduction for a job interview.",
-        "internal_promt": "Create a concise, confident, and professional introduction for a job candidate that highlights background, skills, and alignment with the role."
+        "public_prompt": "Write a brief self-introduction for a job interview.",
+        "internal_prompt": "Create a concise, confident, and professional introduction for a job candidate that highlights background, skills, and alignment with the role."
       },
       {
         "name": "Project Presentation",
-        "public_promt": "Write a project presentation speech for a college tech project.",
-        "internal_promt": "Write a clear, technical yet engaging speech that outlines the project’s purpose, implementation, challenges, and outcomes. Keep it concise and impressive for academic or professional audiences."
+        "public_prompt": "Write a project presentation speech for a college tech project.",
+        "internal_prompt": "Write a clear, technical yet engaging speech that outlines the project’s purpose, implementation, challenges, and outcomes. Keep it concise and impressive for academic or professional audiences."
       },
       {
         "name": "Promotion Announcement",
-        "public_promt": "Generate a short speech announcing my promotion to team lead.",
-        "internal_promt": "Write a grateful and motivational speech acknowledging the promotion, appreciating team support, and expressing enthusiasm for the new responsibilities."
+        "public_prompt": "Generate a short speech announcing my promotion to team lead.",
+        "internal_prompt": "Write a grateful and motivational speech acknowledging the promotion, appreciating team support, and expressing enthusiasm for the new responsibilities."
       }
     ]
   },
@@ -44,13 +44,13 @@
     "speechs": [
       {
         "name": "Motivational Talk",
-        "public_promt": "Create a motivational speech for students before their exams.",
-        "internal_promt": "Write an uplifting and energetic speech that encourages students to stay focused, believe in themselves, and put in consistent effort for success."
+        "public_prompt": "Create a motivational speech for students before their exams.",
+        "internal_prompt": "Write an uplifting and energetic speech that encourages students to stay focused, believe in themselves, and put in consistent effort for success."
       },
       {
         "name": "Overcoming Failure",
-        "public_promt": "Make a speech about overcoming failure and trying again.",
-        "internal_promt": "Write an emotionally powerful and inspiring speech that talks about the value of failure as a learning opportunity and motivates the audience to persevere."
+        "public_prompt": "Make a speech about overcoming failure and trying again.",
+        "internal_prompt": "Write an emotionally powerful and inspiring speech that talks about the value of failure as a learning opportunity and motivates the audience to persevere."
       }
     ]
   },
@@ -59,18 +59,18 @@
     "speechs": [
       {
         "name": "Award Acceptance",
-        "public_promt": "Write a short award acceptance speech.",
-        "internal_promt": "Generate a humble, appreciative speech for receiving an award, thanking relevant people and expressing commitment to continued excellence."
+        "public_prompt": "Write a short award acceptance speech.",
+        "internal_prompt": "Generate a humble, appreciative speech for receiving an award, thanking relevant people and expressing commitment to continued excellence."
       },
       {
         "name": "Graduation Speech",
-        "public_promt": "Write a graduation speech for a student representative.",
-        "internal_promt": "Compose an inspiring and reflective speech celebrating achievements, memories, challenges, and future aspirations, suitable for a graduation ceremony."
+        "public_prompt": "Write a graduation speech for a student representative.",
+        "internal_prompt": "Compose an inspiring and reflective speech celebrating achievements, memories, challenges, and future aspirations, suitable for a graduation ceremony."
       },
       {
         "name": "Welcome Speech",
-        "public_promt": "Write a welcome speech for a school annual day function.",
-        "internal_promt": "Create a warm, respectful, and engaging welcome speech that greets the audience, dignitaries, and sets the tone for a celebratory school event."
+        "public_prompt": "Write a welcome speech for a school annual day function.",
+        "internal_prompt": "Create a warm, respectful, and engaging welcome speech that greets the audience, dignitaries, and sets the tone for a celebratory school event."
       }
     ]
   },
@@ -79,13 +79,13 @@
     "speechs": [
       {
         "name": "Best Man Speech",
-        "public_promt": "Write a funny best man speech for my friend’s wedding.",
-        "internal_promt": "Write a humorous and slightly cheeky best man speech that balances light teasing with heartfelt wishes and avoids anything inappropriate."
+        "public_prompt": "Write a funny best man speech for my friend’s wedding.",
+        "internal_prompt": "Write a humorous and slightly cheeky best man speech that balances light teasing with heartfelt wishes and avoids anything inappropriate."
       },
       {
         "name": "Roast Speech",
-        "public_promt": "Write a playful roast speech for a friend's birthday party.",
-        "internal_promt": "Craft a light-hearted roast that’s funny, teasing, and warm-spirited without being offensive. Include anecdotes and inside jokes that bring laughter."
+        "public_prompt": "Write a playful roast speech for a friend's birthday party.",
+        "internal_prompt": "Craft a light-hearted roast that’s funny, teasing, and warm-spirited without being offensive. Include anecdotes and inside jokes that bring laughter."
       }
     ]
   },
@@ -94,18 +94,18 @@
     "speechs": [
       {
         "name": "Teacher's Day Speech",
-        "public_promt": "Write a student speech for Teacher's Day celebration.",
-        "internal_promt": "Write a respectful and admiring speech that honors teachers’ contributions, dedication, and impact on students' lives, delivered from a student’s perspective."
+        "public_prompt": "Write a student speech for Teacher's Day celebration.",
+        "internal_prompt": "Write a respectful and admiring speech that honors teachers’ contributions, dedication, and impact on students' lives, delivered from a student’s perspective."
       },
       {
         "name": "Science Exhibition Speech",
-        "public_promt": "Write an opening speech for a school science exhibition.",
-        "internal_promt": "Create a knowledgeable and enthusiastic speech that explains the purpose of the exhibition, the importance of science, and welcomes visitors warmly."
+        "public_prompt": "Write an opening speech for a school science exhibition.",
+        "internal_prompt": "Create a knowledgeable and enthusiastic speech that explains the purpose of the exhibition, the importance of science, and welcomes visitors warmly."
       },
       {
         "name": "Annual Day Report Speech",
-        "public_promt": "Create a principal’s speech to present the school’s annual report.",
-        "internal_promt": "Write a formal and informative speech for a principal presenting the school’s yearly academic and extracurricular achievements, including stats and future goals."
+        "public_prompt": "Create a principal’s speech to present the school’s annual report.",
+        "internal_prompt": "Write a formal and informative speech for a principal presenting the school’s yearly academic and extracurricular achievements, including stats and future goals."
       }
     ]
   },
@@ -114,18 +114,18 @@
     "speechs": [
       {
         "name": "Election Campaign Speech",
-        "public_promt": "Generate an election campaign speech for a college student council candidate.",
-        "internal_promt": "Write a persuasive and confident speech highlighting the candidate’s vision, leadership qualities, and plans to bring positive change if elected."
+        "public_prompt": "Generate an election campaign speech for a college student council candidate.",
+        "internal_prompt": "Write a persuasive and confident speech highlighting the candidate’s vision, leadership qualities, and plans to bring positive change if elected."
       },
       {
         "name": "Independence Day Speech",
-        "public_promt": "Write a patriotic speech for Independence Day.",
-        "internal_promt": "Generate a patriotic, inspiring, and historically aware speech that honors the country's journey to freedom and pays tribute to its heroes."
+        "public_prompt": "Write a patriotic speech for Independence Day.",
+        "internal_prompt": "Generate a patriotic, inspiring, and historically aware speech that honors the country's journey to freedom and pays tribute to its heroes."
       },
       {
         "name": "Social Awareness Speech",
-        "public_promt": "Create a speech to raise awareness about climate change.",
-        "internal_promt": "Write an impactful and educational speech on climate change, emphasizing urgency, solutions, and the audience’s role in making a difference."
+        "public_prompt": "Create a speech to raise awareness about climate change.",
+        "internal_prompt": "Write an impactful and educational speech on climate change, emphasizing urgency, solutions, and the audience’s role in making a difference."
       }
     ]
   },
@@ -134,18 +134,18 @@
     "speechs": [
       {
         "name": "Fictional Character Speech",
-        "public_promt": "Create a speech as if I were Harry Potter addressing Hogwarts after the war.",
-        "internal_promt": "Generate a powerful, emotional, and in-character speech from Harry Potter addressing Hogwarts students and staff after the final battle with Voldemort."
+        "public_prompt": "Create a speech as if I were Harry Potter addressing Hogwarts after the war.",
+        "internal_prompt": "Generate a powerful, emotional, and in-character speech from Harry Potter addressing Hogwarts students and staff after the final battle with Voldemort."
       },
       {
         "name": "AI-generated Story Speech",
-        "public_promt": "Create a speech from the perspective of a robot addressing humans in 2120.",
-        "internal_promt": "Write a futuristic, imaginative speech by an AI robot addressing humanity, reflecting on human progress, AI-human collaboration, and peace."
+        "public_prompt": "Create a speech from the perspective of a robot addressing humans in 2120.",
+        "internal_prompt": "Write a futuristic, imaginative speech by an AI robot addressing humanity, reflecting on human progress, AI-human collaboration, and peace."
       },
       {
         "name": "Fantasy World Leadership Speech",
-        "public_promt": "Generate a speech by a queen of an elven kingdom rallying troops before battle.",
-        "internal_promt": "Create a majestic, poetic, and inspiring war-time speech by a fantasy queen calling her elven army to defend their kingdom with honor and courage."
+        "public_prompt": "Generate a speech by a queen of an elven kingdom rallying troops before battle.",
+        "internal_prompt": "Create a majestic, poetic, and inspiring war-time speech by a fantasy queen calling her elven army to defend their kingdom with honor and courage."
       }
     ]
   }
