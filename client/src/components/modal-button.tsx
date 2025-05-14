@@ -1,4 +1,6 @@
-import React, { ButtonHTMLAttributes } from "react";
+"use client";
+
+import React, { ButtonHTMLAttributes, useEffect, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import {
   Modal,
@@ -11,6 +13,7 @@ import languages from "@/data/languages.json";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Slider } from "./ui/slider";
+import { Input } from "./ui/input";
 
 type speech = {
   name: string;
@@ -23,6 +26,15 @@ interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function ModalButton({ speech, ...props }: ModalButtonProps) {
+  const [name, setName] = useState<string>("ex. wedding speech");
+  const [prompt, setPrompt] = useState<string>(speech.public_prompt);
+  const [lang, setLang] = useState<string>("english");
+  const [duration, setDuration] = useState<number>(5);
+
+  useEffect(() => {
+    console.log(lang);
+  }, [lang]);
+
   return (
     <>
       <Modal>
@@ -46,10 +58,23 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
               now! ✈️
             </h4>
             <div className="space-y-4">
+              <div className="w-full flex items-center gap-2">
+                <Label>Speech Name</Label>
+                <Input
+                  value={name}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setName(e.target.value)
+                  }
+                  className="w-68"
+                />
+              </div>
               <div className="w-full space-y-3">
                 <Label>Prompt</Label>
                 <Textarea
-                  value={speech.public_prompt}
+                  value={prompt}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    setPrompt(e.target.value)
+                  }
                   className="h-28 resize-none"
                 />
               </div>
@@ -57,7 +82,16 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
                 <Label>Speech language</Label>
                 <div className="w-full flex items-center gap-2 flex-wrap">
                   {languages.map((language) => (
-                    <Button variant={"outline"} size={"sm"} key={language}>
+                    <Button
+                      variant={
+                        lang.toLowerCase() === language.toLowerCase()
+                          ? "default"
+                          : "outline"
+                      }
+                      size={"sm"}
+                      key={language}
+                      onClick={() => setLang(language)}
+                    >
                       {language}
                     </Button>
                   ))}
@@ -66,16 +100,20 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
               <div className="space-y-3">
                 <Label>Duration</Label>
                 <div className="w-full flex items-center gap-2 justify-between">
-                  <Slider max={20} defaultValue={[5]} />
-                  <p className="text-sm flex items-center">
-                    <span>5</span> Min
+                  <Slider
+                    max={20}
+                    defaultValue={[duration]}
+                    onValueChange={(e) => setDuration(e[0])}
+                  />
+                  <p className="text-sm flex items-center gap-0.5">
+                    <span>{duration}</span> Min
                   </p>
                 </div>
               </div>
             </div>
           </ModalContent>
-          <ModalFooter className="gap-4">
-            <Button variant={"outline"}>Cancle</Button>
+          <ModalFooter className="gap-2">
+            <Button variant={"outline"}>Cancel</Button>
             <Button>Generate</Button>
           </ModalFooter>
         </ModalBody>
