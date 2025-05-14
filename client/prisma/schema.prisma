@@ -12,7 +12,7 @@ model User {
   id        String   @id() @default(uuid())
   name      String
   email     String   @unique
-  tokens    Int      @default(0)
+  tokens    Int      @default(3)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
