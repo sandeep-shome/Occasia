@@ -14,6 +14,8 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Slider } from "./ui/slider";
 import { Input } from "./ui/input";
+import { Dices } from "lucide-react";
+import { useAutoName } from "@/hooks/use-autoname";
 
 type speech = {
   name: string;
@@ -31,9 +33,7 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
   const [lang, setLang] = useState<string>("english");
   const [duration, setDuration] = useState<number>(5);
 
-  useEffect(() => {
-    console.log(lang);
-  }, [lang]);
+  const { generateName } = useAutoName();
 
   return (
     <>
@@ -67,6 +67,13 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
                   }
                   className="w-68"
                 />
+                <Button
+                  variant={"outline"}
+                  size={"icon"}
+                  onClick={() => setName(generateName())}
+                >
+                  <Dices className="size-4 text-neutral-600" />
+                </Button>
               </div>
               <div className="w-full space-y-3">
                 <Label>Prompt</Label>
