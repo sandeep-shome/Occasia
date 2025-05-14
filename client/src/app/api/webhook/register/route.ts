@@ -13,10 +13,13 @@ export async function POST(req: NextRequest) {
   const svix_timestamp = headerPayload.get("svix-timestamp");
   const svix_signature = headerPayload.get("svix-signature");
 
-  if (!svix_id || !svix_timestamp || !svix_signature)
+  if (!svix_id || !svix_timestamp || !svix_signature) {
+    process.env.NODE_ENV === "development" &&
+      console.log("svix headers error!");
     return new Response("Something went wrong with the svix headers", {
       status: 405,
     });
+  }
   const payload = JSON.stringify(await req.json());
 
   const wh = new Webhook(WEBHOOK_SECRET);
@@ -29,6 +32,8 @@ export async function POST(req: NextRequest) {
       "svix-timestamp": svix_timestamp,
     }) as WebhookEvent;
   } catch (error) {
+    process.env.NODE_ENV === "development" &&
+      console.log("svix verification error!");
     return new Response("Something went wrong with the svix verification", {
       status: 405,
     });
@@ -51,6 +56,8 @@ export async function POST(req: NextRequest) {
       const fullName = first_name?.concat(last_name || "");
 
       if (!primaryEmailAddress) {
+        process.env.NODE_ENV === "development" &&
+          console.log("Primary email not found!");
         return new Response("Primary email not found", {
           status: 404,
         });
@@ -65,11 +72,14 @@ export async function POST(req: NextRequest) {
       });
       return new Response(JSON.stringify(user), { status: 201 });
     } catch (error) {
+      process.env.NODE_ENV === "development" &&
+        console.log("prisma error!", error);
       return new Response("Something went wrong while creating user", {
         status: 405,
       });
     }
   } else {
+    process.env.NODE_ENV === "development" && console.log("event type error!");
     return new Response("Something went wrong with the event type", {
       status: 405,
     });
