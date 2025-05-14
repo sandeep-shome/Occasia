@@ -9,10 +9,24 @@ datasource db {
 }
 
 model User {
-  id        String   @id() @default(uuid())
+  id        String   @id()
   name      String
   email     String   @unique
   tokens    Int      @default(3)
+  speechs   Speech[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Speech {
+  id                String   @id() @default(uuid())
+  user              User     @relation(fields: [userId], references: [id])
+  userId            String
+  name              String
+  speech            String
+  liked             Boolean  @default(false)
+  disliked          Boolean  @default(false)
+  regenerationCount Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
