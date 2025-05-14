@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
   if (evtType === "user.created") {
     try {
       const {
+        id,
         email_addresses,
         primary_email_address_id,
         first_name,
@@ -57,6 +58,7 @@ export async function POST(req: NextRequest) {
 
       const user = await prisma.user.create({
         data: {
+          id,
           email: primaryEmailAddress,
           name: fullName || "",
         },
