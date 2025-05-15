@@ -16,6 +16,13 @@ import { Slider } from "./ui/slider";
 import { Input } from "./ui/input";
 import { Dices } from "lucide-react";
 import { useAutoName } from "@/hooks/use-autoname";
+import { useUser } from "@clerk/nextjs";
+import { useGenerateSpeechId } from "@/hooks/use-generate-speech-id";
+import { ISpeechGenerateIdPayload } from "@/types";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import LoadingSpinner from "./loading-spinner";
+import axios from "axios";
 
 type speech = {
   name: string;
@@ -34,6 +41,27 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
   const [duration, setDuration] = useState<number>(5);
 
   const { generateName } = useAutoName();
+  const user = useUser();
+  const router = useRouter();
+
+  if (!user) {
+    router.push("/");
+  }
+
+  const { generateId, error, pending } = useGenerateSpeechId();
+  const handleGenerateSpeechId = async () => {
+    const payload: ISpeechGenerateIdPayload = {
+      userId: user.user?.id || "",
+      generalPrompt: prompt,
+      internalPrompt: speech.internal_prompt,
+      duration,
+      name,
+      lang: lang,
+    };
+    const res = await generateId(payload);
+    if (error) toast(error);
+    if (res) router.push(`/dashboard/arena/${res.data.speechId}`);
+  };
 
   return (
     <>
@@ -91,13 +119,11 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
                   {languages.map((language) => (
                     <Button
                       variant={
-                        lang.toLowerCase() === language.toLowerCase()
-                          ? "default"
-                          : "outline"
+                        lang === language.toLowerCase() ? "default" : "outline"
                       }
                       size={"sm"}
                       key={language}
-                      onClick={() => setLang(language)}
+                      onClick={() => setLang(language.toLowerCase())}
                     >
                       {language}
                     </Button>
@@ -121,7 +147,10 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
           </ModalContent>
           <ModalFooter className="gap-2">
             <Button variant={"outline"}>Cancel</Button>
-            <Button>Generate</Button>
+            <Button onClick={handleGenerateSpeechId} className="min-w-24">
+              {pending ? <LoadingSpinner className="size-4" /> : "Generate"}
+              {/* generate */}
+            </Button>
           </ModalFooter>
         </ModalBody>
       </Modal>
