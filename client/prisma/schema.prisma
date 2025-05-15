@@ -26,10 +26,10 @@ model Speech {
   generalPrompt     String
   internalPrompt    String
   duration          Int      @default(2)
-  result            String
+  result            String   @default("")
   liked             Boolean  @default(false)
   disliked          Boolean  @default(false)
-  regenerationCount Int
+  regenerationCount Int      @default(0)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
