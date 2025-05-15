@@ -1,17 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest } from "next/server";
-
-interface Payload {
-  userId: string;
-  name: string;
-  generalPrompt: string;
-  internalPrompt: string;
-  duration: number;
-}
-
+import { ISpeechGenerateIdPayload } from "@/types";
 export async function POST(req: NextRequest) {
   try {
-    const payload = (await req.json()) as Payload;
+    const payload = (await req.json()) as ISpeechGenerateIdPayload;
     const userData = await prisma.user.findUnique({
       where: {
         id: payload?.userId,
