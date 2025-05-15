@@ -30,6 +30,10 @@ export async function POST(req: NextRequest) {
 
     return new Response(JSON.stringify({ speechId }), { status: 201 });
   } catch (error) {
+    process.env.NODE_ENV === "development" && console.log(error);
+    if (error instanceof Error) {
+      return new Response(error.message, { status: 500 });
+    }
     return new Response("Something went wrong!", { status: 500 });
   }
 }
