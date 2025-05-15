@@ -4,4 +4,5 @@ export interface ISpeechGenerateIdPayload {
   generalPrompt: string;
   internalPrompt: string;
   duration: number;
+  lang: string;
 }
