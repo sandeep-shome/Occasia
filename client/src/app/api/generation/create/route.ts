@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
         internalPrompt: payload.internalPrompt,
         generalPrompt: payload.generalPrompt,
         duration: payload.duration,
+        lang: payload.lang,
       },
     });
 
