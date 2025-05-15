@@ -25,6 +25,7 @@ model Speech {
   name              String
   generalPrompt     String
   internalPrompt    String
+  lang              String   @default("english")
   duration          Int      @default(2)
   result            String   @default("")
   liked             Boolean  @default(false)
