@@ -15,6 +15,7 @@ export const useGenerateSpeechId = () => {
       );
       process.env.NODE_ENV === "development" && console.log(data);
       setPending(false);
+      return data;
     } catch (error) {
       setPending(false);
       if (error instanceof Error) {
