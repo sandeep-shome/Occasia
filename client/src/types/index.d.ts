@@ -1,4 +1,4 @@
-export interface Payload {
+export interface ISpeechGenerateIdPayload {
   userId: string;
   name: string;
   generalPrompt: string;
