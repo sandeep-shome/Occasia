@@ -8,6 +8,7 @@ export const useGenerateSpeechId = () => {
 
   async function generateId(payload: ISpeechGenerateIdPayload) {
     setPending(true);
+    setError(null);
     try {
       const data = await axios.post(
         "http://localhost:3000/api/generation/create",
