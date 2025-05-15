@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       const primaryEmailAddress = email_addresses.find(
         (email) => email.id === primary_email_address_id
       )?.email_address;
-      const fullName = first_name?.concat(last_name || "");
+      const fullName = first_name + " " + last_name;
 
       if (!primaryEmailAddress) {
         process.env.NODE_ENV === "development" &&
