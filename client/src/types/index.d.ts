@@ -1,8 +1,8 @@
 export interface ISpeechGenerateIdPayload extends GenerationPayload {
   userId: string;
+  name: string;
 }
 export interface GenerationPayload {
-  name: string;
   generalPrompt: string;
   internalPrompt: string;
   duration: number;
