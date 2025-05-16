@@ -1,7 +1,8 @@
+import { generateMessage } from "@/lib/inference";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(
+export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
@@ -20,6 +21,20 @@ export async function POST(
     }
 
     // implementing ai generation
+    const {
+      name,
+      id,
+      liked,
+      disliked,
+      regenerationCount,
+      userId,
+      result,
+      createdAt,
+      updatedAt,
+      ...payloadData
+    } = speechData;
+    const message = await generateMessage(payloadData);
+    return NextResponse.json({ message: message.content });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 405 });
