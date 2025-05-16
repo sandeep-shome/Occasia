@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       return new Response("Ran out of tokens", { status: 405 });
     }
 
-    const { id: speechId } = await prisma.speech.create({
+    const { id, name } = await prisma.speech.create({
       data: {
         userId: payload.userId,
         name: payload.name,
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return new Response(JSON.stringify({ speechId }), { status: 201 });
+    return new Response(JSON.stringify({ id, name }), { status: 201 });
   } catch (error) {
     process.env.NODE_ENV === "development" && console.log(error);
     if (error instanceof Error) {
