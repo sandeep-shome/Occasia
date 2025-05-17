@@ -1,25 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-type SidebarProperty = {
+interface SidebarItem {
   id: string;
-  name: string;
-};
-
-export interface ISidebarState {
-  speeches: SidebarProperty[];
+  title: string;
+  url: string;
+}
+interface SidebarState {
+  items: SidebarItem[];
 }
 
-const initialState: ISidebarState = {
-  speeches: [],
+const initialState: SidebarState = {
+  items: [],
 };
 
 const sidebarSlice = createSlice({
   name: "sidebar",
   initialState,
   reducers: {
-    setInitialState: (state, action: PayloadAction<SidebarProperty[]>) => {
-      state.speeches = state.speeches.concat(action.payload);
+    setInitialState: (
+      state,
+      action: PayloadAction<{ name: string; id: string }[]>
+    ) => {
+      let speechArray: SidebarItem[] = [];
+      for (const speech of action.payload) {
+        speechArray.push({
+          id: speech.id,
+          title: speech.name,
+          url: `/dashboard/arena/${speech.id}`,
+        });
+      }
+      state.items = speechArray;
     },
   },
 });
