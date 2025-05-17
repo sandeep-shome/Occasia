@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 
-const useSidebarItems = () => {
+export const useSidebarItems = () => {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
 
