@@ -1,0 +1,30 @@
+{
+  "navMain": [
+    {
+      "title": "Accessibility",
+      "url": "#",
+      "items": [
+        {
+          "title": "Subscription",
+          "url": "#"
+        },
+        {
+          "title": "Settings",
+          "url": "#"
+        },
+        {
+          "title": "Community",
+          "url": "#"
+        },
+        {
+          "title": "Examples",
+          "url": "#"
+        },
+        {
+          "title": "Help",
+          "url": "#"
+        }
+      ]
+    }
+  ]
+}
