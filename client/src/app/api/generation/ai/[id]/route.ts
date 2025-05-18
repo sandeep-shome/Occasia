@@ -33,6 +33,9 @@ export async function GET(
       return NextResponse.json({ message: "Error: failed" }, { status: 418 });
     }
 
+    if (speechData.result) {
+      return NextResponse.json(speechData);
+    }
     // implementing ai generation
     const {
       name,
