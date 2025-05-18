@@ -1,5 +1,5 @@
 import logger from "@/lib/logger";
-import { prisma } from "@/lib/prisma";
+import axios from "axios";
 import { useState } from "react";
 
 export const useSidebarItems = () => {
@@ -9,20 +9,8 @@ export const useSidebarItems = () => {
   async function getSidebarItems(id: string) {
     setPending(true);
     try {
-      const speechData = await prisma.speech.findMany({
-        select: {
-          name: true,
-          id: true,
-        },
-        where: {
-          userId: id,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      });
-
-      return speechData;
+      const data = axios.get(`/api/fetch/sidebar/${id}`);
+      return data;
     } catch (error) {
       logger(error);
       if (error instanceof Error) {
