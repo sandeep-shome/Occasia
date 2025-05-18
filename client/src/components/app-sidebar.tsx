@@ -83,7 +83,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 : sidebarState.items.map((speech, index) => (
                     <SidebarMenuItem key={speech.id}>
                       <SidebarMenuButton asChild>
-                        <Link href={speech.url}>{speech.title}</Link>
+                        <Link href={`/dashboard/arena/${speech.id}`}>
+                          {speech.title}
+                        </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
