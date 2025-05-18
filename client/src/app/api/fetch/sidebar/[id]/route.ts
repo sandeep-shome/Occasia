@@ -6,6 +6,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const { id: userId } = await params;
+  if (!userId)
+    return NextResponse.json({ message: "Error no id param" }, { status: 405 });
   try {
     const data = await prisma.speech.findMany({
       select: {
