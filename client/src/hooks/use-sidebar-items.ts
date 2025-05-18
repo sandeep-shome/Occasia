@@ -1,15 +1,13 @@
 import logger from "@/lib/logger";
 import { prisma } from "@/lib/prisma";
-import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 
 export const useSidebarItems = () => {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
 
-  async function getSidebarItems() {
+  async function getSidebarItems(id: string) {
     setPending(true);
-    const user = useUser();
     try {
       const speechData = await prisma.speech.findMany({
         select: {
@@ -17,7 +15,7 @@ export const useSidebarItems = () => {
           id: true,
         },
         where: {
-          userId: user.user?.id,
+          userId: id,
         },
         orderBy: {
           createdAt: "desc",
