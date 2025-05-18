@@ -44,10 +44,6 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
   const user = useUser();
   const router = useRouter();
 
-  if (!user) {
-    router.push("/");
-  }
-
   const { generateId, error, pending } = useGenerateSpeechId();
   const handleGenerateSpeechId = async () => {
     const payload: ISpeechGenerateIdPayload = {
@@ -60,7 +56,7 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
     };
     const res = await generateId(payload);
     if (error) toast(error);
-    if (res) router.push(`/dashboard/arena/${res.data.speechId}`);
+    if (res) router.push(`/dashboard/arena/${res.data.id}`);
   };
 
   return (
