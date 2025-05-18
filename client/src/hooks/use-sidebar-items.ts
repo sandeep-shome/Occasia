@@ -9,7 +9,7 @@ export const useSidebarItems = () => {
   async function getSidebarItems(id: string) {
     setPending(true);
     try {
-      const data = axios.get(`/api/fetch/sidebar/${id}`);
+      const data = await axios.get(`/api/fetch/sidebar/${id}`);
       return data;
     } catch (error) {
       logger(error);
