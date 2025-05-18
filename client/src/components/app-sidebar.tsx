@@ -33,11 +33,14 @@ import { toast } from "sonner";
 import { setInitialState } from "@/store/features/sidebar-slice";
 import { Skeleton } from "./ui/skeleton";
 import { useUser } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const sidebarState = useAppSelector((state) => state.sidebar);
   const dispatch = useAppDispatch();
   const user = useUser();
+  const pathname = usePathname().split("/");
+
   const { pending, error, getSidebarItems } = useSidebarItems();
 
   const handleFetchSidebarItems = async () => {
@@ -82,7 +85,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     ))
                 : sidebarState.items.map((speech, index) => (
                     <SidebarMenuItem key={speech.id}>
-                      <SidebarMenuButton asChild>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={speech.id === pathname[pathname.length - 1]}
+                      >
                         <Link href={`/dashboard/arena/${speech.id}`}>
                           {speech.title}
                         </Link>
