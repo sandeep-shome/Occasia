@@ -33,13 +33,14 @@ import { toast } from "sonner";
 import { setInitialState } from "@/store/features/sidebar-slice";
 import { Skeleton } from "./ui/skeleton";
 import { useUser } from "@clerk/nextjs";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const sidebarState = useAppSelector((state) => state.sidebar);
   const dispatch = useAppDispatch();
   const user = useUser();
   const pathname = usePathname().split("/");
+  const router = useRouter();
 
   const { pending, error, getSidebarItems } = useSidebarItems();
 
@@ -117,30 +118,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <Card className="shadow-none">
-          <form>
-            <CardHeader className="p-4 pb-0">
-              <CardTitle className="text-sm">
-                Subscribe to our newsletter
-              </CardTitle>
-              <CardDescription>
-                Opt-in to receive updates and news about the sidebar.
-              </CardDescription>
-            </CardHeader>
+          <div>
             <CardContent className="grid gap-2.5 p-4">
-              <div className="flex items-center gap-2">
-                <Progress max={10} value={33} />
-                <p className="flex items-center text-xs">
-                  <span>1</span> / <span>3</span>
-                </p>
-              </div>
               <Button
                 className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
                 size="sm"
+                onClick={() => router.push("/dashboard/template")}
               >
-                Upgrade
+                New Speech
               </Button>
             </CardContent>
-          </form>
+          </div>
         </Card>
       </SidebarFooter>
       <SidebarRail />
