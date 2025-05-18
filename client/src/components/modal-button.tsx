@@ -22,7 +22,8 @@ import { ISpeechGenerateIdPayload } from "@/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "./loading-spinner";
-import axios from "axios";
+import { useAppDispatch } from "@/store/store";
+import { addSidebarItem } from "@/store/features/sidebar-slice";
 
 type speech = {
   name: string;
@@ -40,6 +41,7 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
   const [lang, setLang] = useState<string>("english");
   const [duration, setDuration] = useState<number>(5);
 
+  const dispatch = useAppDispatch();
   const { generateName } = useAutoName();
   const user = useUser();
   const router = useRouter();
@@ -56,7 +58,10 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
     };
     const res = await generateId(payload);
     if (error) toast(error);
-    if (res) router.push(`/dashboard/arena/${res.data.id}`);
+    if (res?.status === 201) {
+      dispatch(addSidebarItem(res.data));
+      router.push(`/dashboard/arena/${res.data.id}`);
+    }
   };
 
   return (
