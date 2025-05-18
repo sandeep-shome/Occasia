@@ -4,7 +4,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 interface SidebarItem {
   id: string;
   title: string;
-  url: string;
 }
 interface SidebarState {
   items: SidebarItem[];
@@ -27,13 +26,21 @@ const sidebarSlice = createSlice({
         speechArray.push({
           id: speech.id,
           title: speech.name,
-          url: `/dashboard/arena/${speech.id}`,
         });
       }
       state.items = speechArray;
     },
+    addSidebarItem: (
+      state,
+      action: PayloadAction<{ name: string; id: string }>
+    ) => {
+      state.items.unshift({
+        title: action.payload.name,
+        id: action.payload.id,
+      });
+    },
   },
 });
 
-export const { setInitialState } = sidebarSlice.actions;
+export const { setInitialState, addSidebarItem } = sidebarSlice.actions;
 export const sidebarReducer = sidebarSlice.reducer;
