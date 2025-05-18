@@ -25,14 +25,14 @@ function AppHeader() {
           <Breadcrumb>
             <BreadcrumbList>
               {pathname.map((path, index) => (
-                <>
+                <div key={index}>
                   <BreadcrumbItem className="hidden md:block">
                     <BreadcrumbLink href="#">{path}</BreadcrumbLink>
                   </BreadcrumbItem>
                   {index != pathname.length - 1 && (
                     <BreadcrumbSeparator className="hidden md:block" />
                   )}
-                </>
+                </div>
               ))}
             </BreadcrumbList>
           </Breadcrumb>
