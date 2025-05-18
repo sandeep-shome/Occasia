@@ -1,12 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { ChevronRight } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -32,120 +26,116 @@ import Image from "next/image";
 import logo from "@/assets/logo.svg";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
-import StoreProvider from "@/lib/store-provider";
-
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Recent Speeches",
-      url: "#",
-      items: [
-        {
-          title: "Wedding Speech",
-          url: "#",
-        },
-        {
-          title: "College Tribute",
-          url: "#",
-          isActive: true,
-        },
-      ],
-    },
-    {
-      title: "General",
-      url: "#",
-      items: [
-        {
-          title: "Subscription",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-  ],
-};
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import staticData from "@/data/static-sidebar.json";
+import { useSidebarItems } from "@/hooks/use-sidebar-items";
+import { toast } from "sonner";
+import { setInitialState } from "@/store/features/sidebar-slice";
+import { Skeleton } from "./ui/skeleton";
+import { useUser } from "@clerk/nextjs";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const sidebarState = useAppSelector((state) => state.sidebar);
+  const dispatch = useAppDispatch();
+  const user = useUser();
+  const { pending, error, getSidebarItems } = useSidebarItems();
+
+  const handleFetchSidebarItems = async () => {
+    const userId = user.user?.id || "";
+    const data = await getSidebarItems(userId);
+    if (error) {
+      toast(error);
+      return;
+    }
+    if (data) dispatch(setInitialState(data.data));
+  };
+
+  React.useEffect(() => {
+    if (user.isLoaded) {
+      handleFetchSidebarItems();
+    }
+  }, [user.isLoaded]);
+
   return (
-    <StoreProvider>
-      <Sidebar {...props}>
-        <SidebarHeader>
-          <div className="w-full flex items-center justify-between px-2 py-2">
-            <Link href={"/"}>
-              <Image src={logo} alt="logo" width={90} />
-            </Link>
-          </div>
-        </SidebarHeader>
-        <SidebarContent className="gap-0">
-          {/* We create a collapsible SidebarGroup for each parent. */}
-          {data.navMain.map((item) => (
-            <Collapsible
-              key={item.title}
-              title={item.title}
-              defaultOpen
-              className="group/collapsible"
-            >
-              <SidebarGroup>
-                <SidebarGroupLabel
-                  asChild
-                  className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
-                >
-                  <CollapsibleTrigger>
-                    {item.title}{" "}
-                    <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                  </CollapsibleTrigger>
-                </SidebarGroupLabel>
-                <CollapsibleContent>
-                  <SidebarGroupContent>
-                    <SidebarMenu>
-                      {item.items.map((item) => (
-                        <SidebarMenuItem key={item.title}>
-                          <SidebarMenuButton asChild isActive={item.isActive}>
-                            <a href={item.url}>{item.title}</a>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      ))}
-                    </SidebarMenu>
-                  </SidebarGroupContent>
-                </CollapsibleContent>
-              </SidebarGroup>
-            </Collapsible>
-          ))}
-        </SidebarContent>
-        <SidebarFooter>
-          <Card className="shadow-none">
-            <form>
-              <CardHeader className="p-4 pb-0">
-                <CardTitle className="text-sm">
-                  Subscribe to our newsletter
-                </CardTitle>
-                <CardDescription>
-                  Opt-in to receive updates and news about the sidebar.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-2.5 p-4">
-                <div className="flex items-center gap-2">
-                  <Progress max={10} value={5} />
-                  <p className="flex items-center text-xs">
-                    <span>5</span> / <span>10</span>
-                  </p>
-                </div>
-                <Button
-                  className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
-                  size="sm"
-                >
-                  Upgrade
-                </Button>
-              </CardContent>
-            </form>
-          </Card>
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
-    </StoreProvider>
+    <Sidebar {...props}>
+      <SidebarHeader>
+        <div className="w-full flex items-center justify-between px-2 py-2">
+          <Link href={"/"}>
+            <Image src={logo} alt="logo" width={90} />
+          </Link>
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="gap-0">
+        <SidebarGroup>
+          <SidebarGroupLabel>Recent Speeches</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {pending
+                ? Array(4)
+                    .fill(true)
+                    .map((_, index) => (
+                      <SidebarMenuItem key={index}>
+                        <SidebarMenuButton asChild>
+                          <Skeleton className="w-full h-1" />
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))
+                : sidebarState.items.map((speech, index) => (
+                    <SidebarMenuItem key={speech.id}>
+                      <SidebarMenuButton asChild>
+                        <Link href={speech.url}>{speech.title}</Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        {staticData.navMain.map((item) => (
+          <SidebarGroup key={item.title}>
+            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {item.items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <Link href={item.url}>{item.title}</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
+      </SidebarContent>
+      <SidebarFooter>
+        <Card className="shadow-none">
+          <form>
+            <CardHeader className="p-4 pb-0">
+              <CardTitle className="text-sm">
+                Subscribe to our newsletter
+              </CardTitle>
+              <CardDescription>
+                Opt-in to receive updates and news about the sidebar.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-2.5 p-4">
+              <div className="flex items-center gap-2">
+                <Progress max={10} value={33} />
+                <p className="flex items-center text-xs">
+                  <span>1</span> / <span>3</span>
+                </p>
+              </div>
+              <Button
+                className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
+                size="sm"
+              >
+                Upgrade
+              </Button>
+            </CardContent>
+          </form>
+        </Card>
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
   );
 }
