@@ -1,3 +1,4 @@
+import { SpeechData } from "@/types";
 import axios from "axios";
 import { useState } from "react";
 
@@ -9,7 +10,7 @@ export const useGenerate = () => {
     setPending(true);
     try {
       const res = await axios.get(`/api/generation/ai/${speechId}`);
-      return res.data;
+      return res.data as SpeechData;
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
