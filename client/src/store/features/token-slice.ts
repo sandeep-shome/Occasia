@@ -15,7 +15,7 @@ const tokenSlice = createSlice({
     initToken: (state, action: PayloadAction<{ tokens: number }>) => {
       state.tokens = action.payload.tokens;
     },
-    deductToken: (state, action) => {
+    deductToken: (state) => {
       state.tokens = state.tokens - 1;
     },
   },
