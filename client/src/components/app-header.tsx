@@ -1,10 +1,32 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Copyright } from "lucide-react";
+import { useFetchTokens } from "@/hooks/use-fetch-token";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { initToken } from "@/store/features/token-slice";
+import { toast } from "sonner";
 
 function AppHeader() {
+  const user = useUser();
+  const { pending, error, getTokens } = useFetchTokens();
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state.token);
+
+  const handleGetToken = async (id: string) => {
+    const data = await getTokens(id);
+    if (error) toast.warning(error);
+    data && dispatch(initToken(data!));
+  };
+
+  useEffect(() => {
+    if (user.isLoaded) {
+      handleGetToken(user.user?.id || "");
+    }
+  }, [user.isLoaded]);
   return (
     <>
       <header className="flex justify-between sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
@@ -13,10 +35,12 @@ function AppHeader() {
           <Separator orientation="vertical" className="mr-2 h-4" />
         </div>
         <div className="flex items-center gap-4">
-          <div className="border border-neutral-400 rounded-full flex items-center gap-1 px-2 py-0.5">
-            <Copyright className="size-4 text-neutral-600" />
-            <span className="text-sm">24</span>
-          </div>
+          {!pending && (
+            <div className="border border-neutral-400 rounded-full flex items-center gap-1 px-2 py-0.5">
+              <Copyright className="size-4 text-neutral-600" />
+              <span className="text-sm">{state.tokens}</span>
+            </div>
+          )}
           <SignedIn>
             <UserButton />
           </SignedIn>
