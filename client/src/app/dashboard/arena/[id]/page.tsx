@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGenerate } from "@/hooks/use-generate";
+import { deductToken } from "@/store/features/token-slice";
+import { useAppDispatch } from "@/store/store";
 import { SpeechData } from "@/types";
 import {
   Clipboard,
@@ -27,12 +29,17 @@ import { toast } from "sonner";
 function page() {
   const params = useParams<{ id: string }>();
   const { pending, error, getSpeech } = useGenerate();
+  const dispatch = useAppDispatch();
+
   const [speechData, setSpeechData] = useState<SpeechData>();
 
   const handleGenerateSpeech = async () => {
     const data = await getSpeech(params.id);
     if (error) toast.warning(error);
-    if (data) setSpeechData(data);
+    if (data) {
+      setSpeechData(data);
+      dispatch(deductToken());
+    }
   };
 
   useEffect(() => {
