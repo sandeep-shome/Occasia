@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface TokenState {
   token: number;
-  pending: boolean;
 }
 
 const initialState: TokenState = {
   token: 0,
-  pending: false,
 };
 
 const tokenSlice = createSlice({
