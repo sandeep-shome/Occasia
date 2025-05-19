@@ -5,9 +5,9 @@ export const useFetchTokens = () => {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
 
-  const getTokens = async () => {
+  const getTokens = async (id: string) => {
     try {
-      const res = await axios.get("");
+      const res = await axios.get(`/api/fetch/token/${id}`);
       return res.data as { token: string };
     } catch (error) {
       if (error instanceof Error) {
