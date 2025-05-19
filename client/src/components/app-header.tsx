@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { usePathname } from "next/navigation";
+import { Copyright } from "lucide-react";
 
 function AppHeader() {
   return (
@@ -20,7 +12,11 @@ function AppHeader() {
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
         </div>
-        <div className="">
+        <div className="flex items-center gap-4">
+          <div className="border border-neutral-400 rounded-full flex items-center gap-1 px-2 py-0.5">
+            <Copyright className="size-4 text-neutral-600" />
+            <span className="text-sm">24</span>
+          </div>
           <SignedIn>
             <UserButton />
           </SignedIn>
