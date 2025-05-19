@@ -8,7 +8,7 @@ export const useFetchTokens = () => {
   const getTokens = async (id: string) => {
     try {
       const res = await axios.get(`/api/fetch/token/${id}`);
-      return res.data as { token: string };
+      return res.data as { token: number };
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
