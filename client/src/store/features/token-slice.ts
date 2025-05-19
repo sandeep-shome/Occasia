@@ -12,8 +12,8 @@ const tokenSlice = createSlice({
   name: "token",
   initialState,
   reducers: {
-    initToken: (state, action: PayloadAction<{ token: number }>) => {
-      state.token = action.payload.token;
+    initToken: (state, action: PayloadAction<{ tokens: number }>) => {
+      state.token = action.payload.tokens;
     },
   },
 });
