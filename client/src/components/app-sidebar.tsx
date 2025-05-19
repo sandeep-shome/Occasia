@@ -123,7 +123,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <Button
                 className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
                 size="sm"
-                onClick={() => router.push("/dashboard/template")}
+                onClick={() => router.push("/dashboard")}
               >
                 New Speech
               </Button>
