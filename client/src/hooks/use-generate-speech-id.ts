@@ -10,10 +10,7 @@ export const useGenerateSpeechId = () => {
     setPending(true);
     setError(null);
     try {
-      const data = await axios.post(
-        "http://localhost:3000/api/generation/create",
-        payload
-      );
+      const data = await axios.post("/api/generation/create", payload);
       process.env.NODE_ENV === "development" && console.log(data);
       setPending(false);
       return data;
