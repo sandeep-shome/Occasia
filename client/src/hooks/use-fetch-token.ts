@@ -6,6 +6,7 @@ export const useFetchTokens = () => {
   const [pending, setPending] = useState<boolean>(false);
 
   const getTokens = async (id: string) => {
+    setPending(true);
     try {
       const res = await axios.get(`/api/fetch/token/${id}`);
       return res.data as { token: number };
