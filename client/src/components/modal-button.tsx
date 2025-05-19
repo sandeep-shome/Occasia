@@ -22,7 +22,7 @@ import { ISpeechGenerateIdPayload } from "@/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "./loading-spinner";
-import { useAppDispatch } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { addSidebarItem } from "@/store/features/sidebar-slice";
 
 type speech = {
@@ -41,6 +41,7 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
   const [lang, setLang] = useState<string>("english");
   const [duration, setDuration] = useState<number>(5);
 
+  const tokenState = useAppSelector((state) => state.token);
   const dispatch = useAppDispatch();
   const { generateName } = useAutoName();
   const user = useUser();
@@ -48,6 +49,13 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
 
   const { generateId, error, pending } = useGenerateSpeechId();
   const handleGenerateSpeechId = async () => {
+    if (tokenState.tokens < 1) {
+      toast.error("Error: Insufficient token!", {
+        dismissible: true,
+        description: "Please purchase tokens before you proceed",
+      });
+      return;
+    }
     const payload: ISpeechGenerateIdPayload = {
       userId: user.user?.id || "",
       generalPrompt: prompt,
@@ -57,7 +65,7 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
       lang: lang,
     };
     const res = await generateId(payload);
-    if (error) toast(error);
+    if (error) toast.warning("Error:402 something went wrong!");
     if (res?.status === 201) {
       dispatch(addSidebarItem(res.data));
       router.push(`/dashboard/arena/${res.data.id}`);
