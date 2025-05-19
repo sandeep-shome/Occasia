@@ -9,6 +9,8 @@ import { useFetchTokens } from "@/hooks/use-fetch-token";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { initToken } from "@/store/features/token-slice";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { stat } from "fs";
 
 function AppHeader() {
   const user = useUser();
@@ -36,8 +38,15 @@ function AppHeader() {
         </div>
         <div className="flex items-center gap-4">
           {!pending && (
-            <div className="border border-neutral-400 rounded-full flex items-center gap-1 px-2 py-0.5">
-              <Copyright className="size-4 text-neutral-600" />
+            <div
+              className={cn(
+                "border rounded-full flex items-center gap-1 px-2 py-0.5",
+                state.tokens > 0
+                  ? "border-neutral-400 text-neutral-600"
+                  : "border-red-400 text-red-400"
+              )}
+            >
+              <Copyright className="size-4" />
               <span className="text-sm">{state.tokens}</span>
             </div>
           )}
