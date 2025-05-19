@@ -9,7 +9,7 @@ export const useFetchTokens = () => {
     setPending(true);
     try {
       const res = await axios.get(`/api/fetch/token/${id}`);
-      return res.data as { token: number };
+      return res.data as { tokens: number };
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
