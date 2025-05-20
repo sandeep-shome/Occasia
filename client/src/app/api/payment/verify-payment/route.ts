@@ -32,7 +32,9 @@ export const POST = async (req: NextRequest) => {
     await prisma.user.update({
       where: { id: userId },
       data: {
-        tokens: tokens,
+        tokens: {
+          increment: tokens,
+        },
       },
     });
 
