@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import tokens from "razorpay/dist/types/tokens";
 
 interface TokenState {
   tokens: number;
@@ -18,8 +19,11 @@ const tokenSlice = createSlice({
     deductToken: (state) => {
       state.tokens = state.tokens - 1;
     },
+    addToken: (state, action: PayloadAction<{ tokens: number }>) => {
+      state.tokens = state.tokens + action.payload.tokens;
+    },
   },
 });
 
-export const { initToken, deductToken } = tokenSlice.actions;
+export const { initToken, deductToken, addToken } = tokenSlice.actions;
 export const tokenReducer = tokenSlice.reducer;
