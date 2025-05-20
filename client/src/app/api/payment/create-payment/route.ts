@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest) => {
   const options = {
     amount: amount * 100,
     currency: "INR",
-    receipt: `order_${v4()}`,
+    receipt: `order_${v4().slice(0, 30)}`,
   };
 
   try {
