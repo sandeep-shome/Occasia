@@ -38,10 +38,11 @@ model Speech {
 }
 
 model Subscription {
-  id        String   @id
-  user      User     @relation(fields: [userId], references: [id])
-  tokens    Int
-  userId    String
-  amount    Int
-  createdAt DateTime @default(now())
+  id         String   @id
+  user       User     @relation(fields: [userId], references: [id])
+  tokens     Int
+  userId     String
+  amount     Int
+  successful Boolean
+  createdAt  DateTime @default(now())
 }
