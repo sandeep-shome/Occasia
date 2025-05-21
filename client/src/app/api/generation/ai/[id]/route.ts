@@ -74,7 +74,7 @@ export async function GET(
       },
     });
 
-    return NextResponse.json(updatedSpeechData);
+    return NextResponse.json(updatedSpeechData, { status: 201 });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message }, { status: 405 });
