@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
-    await prisma.subscription.create({
+    const subscriptionData = await prisma.subscription.create({
       data: {
         id: razorpay_order_id,
         userId,
@@ -53,7 +53,11 @@ export const POST = async (req: NextRequest) => {
         },
       },
     });
-    return NextResponse.json({ message: "Token purchased", tokens });
+    return NextResponse.json({
+      message: "Token purchased",
+      tokens,
+      subscriptionData,
+    });
   } catch (error: any) {
     return NextResponse.json(
       { message: error.message || "Something went wrong while updating user!" },
