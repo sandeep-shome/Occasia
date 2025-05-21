@@ -26,6 +26,7 @@ export const POST = async (req: NextRequest) => {
         userId,
         amount: tokens * 12,
         tokens,
+        successful: false,
       },
     });
     return NextResponse.json(
@@ -35,6 +36,15 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
+    await prisma.subscription.create({
+      data: {
+        id: razorpay_order_id,
+        userId,
+        amount: tokens * 12,
+        tokens,
+        successful: true,
+      },
+    });
     await prisma.user.update({
       where: { id: userId },
       data: {
