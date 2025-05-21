@@ -1,5 +1,6 @@
 "use client";
 
+import MessageSkeleton from "@/components/message-skeleton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,6 +15,7 @@ import { useGenerate } from "@/hooks/use-generate";
 import { deductToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
 import { SpeechData } from "@/types";
+import { AxiosResponse } from "axios";
 import {
   Clipboard,
   Download,
@@ -31,16 +33,24 @@ function page() {
   const { pending, error, getSpeech } = useGenerate();
   const dispatch = useAppDispatch();
 
-  const [speechData, setSpeechData] = useState<SpeechData>();
+  const [speechData, setSpeechData] = useState<AxiosResponse | null>();
 
   const handleGenerateSpeech = async () => {
     const data = await getSpeech(params.id);
-    if (error) toast.warning(error);
-    if (data) {
-      setSpeechData(data);
-      dispatch(deductToken());
-    }
+    setSpeechData(data);
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (speechData) {
+      if (speechData.status === 201) dispatch(deductToken());
+    }
+  }, [speechData]);
 
   useEffect(() => {
     handleGenerateSpeech();
@@ -49,52 +59,67 @@ function page() {
   return (
     <>
       <section className="w-full flex items-center justify-center">
-        <Card className="w-full lg:w-[60%]">
-          <CardHeader>
-            <CardTitle>
-              {pending ? <Skeleton className="w-28 h-4" /> : speechData?.name}
-            </CardTitle>
-            <div className="mt-4 flex items-center justify-between">
+        {pending ? (
+          <MessageSkeleton />
+        ) : error != null && error.status === 418 ? (
+          <Card className="border-destructive w-full lg:w-[60%]">
+            <CardHeader>
+              <CardTitle className="text-destructive">
+                Something went wrong! 😭
+              </CardTitle>
+              <CardDescription className="text-destructive">
+                Don't worry no token will be deducted for a failure message
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-destructive text-sm">
+              Sorry! Sometimes there may happen multiple internal server errors
+              or other issues, please be patients and try to regenerate. No
+              tokens will be deducted for this failed message{" "}
+            </CardContent>
+            <CardFooter>
+              <Button variant={"outline"} size={"icon"}>
+                <RotateCcw className="size-4 text-neutral-600" />
+              </Button>
+            </CardFooter>
+          </Card>
+        ) : (
+          <Card className="w-full lg:w-[60%]">
+            <CardHeader>
+              <CardTitle>{speechData?.data.name}</CardTitle>
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Button variant={"outline"} size={"icon"}>
+                    <Pen className="size-4 text-neutral-600" />
+                  </Button>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button variant={"outline"} size={"icon"}>
+                    <Clipboard className="size-4 text-neutral-600" />
+                  </Button>
+                  <Button variant={"outline"} size={"icon"}>
+                    <RotateCcw className="size-4 text-neutral-600" />
+                  </Button>
+                  <Button variant={"outline"} size={"icon"}>
+                    <Download className="size-4 text-neutral-600" />
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              {<div className="">{speechData?.data.result}</div>}
+            </CardContent>
+            <CardFooter>
               <div className="flex items-center gap-2">
                 <Button variant={"outline"} size={"icon"}>
-                  <Pen className="size-4 text-neutral-600" />
-                </Button>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button variant={"outline"} size={"icon"}>
-                  <Clipboard className="size-4 text-neutral-600" />
+                  <ThumbsUp className="size-4 text-neutral-600" />
                 </Button>
                 <Button variant={"outline"} size={"icon"}>
-                  <RotateCcw className="size-4 text-neutral-600" />
-                </Button>
-                <Button variant={"outline"} size={"icon"}>
-                  <Download className="size-4 text-neutral-600" />
+                  <ThumbsDown className="size-4 text-neutral-600" />
                 </Button>
               </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-5">
-            {pending ? (
-              <div className="space-y-2">
-                <Skeleton className="w-28 h-4" />
-                <Skeleton className="w-24 h-4" />
-                <Skeleton className="w-20 h-4" />
-              </div>
-            ) : (
-              <div className="">{speechData?.result}</div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <div className="flex items-center gap-2">
-              <Button variant={"outline"} size={"icon"}>
-                <ThumbsUp className="size-4 text-neutral-600" />
-              </Button>
-              <Button variant={"outline"} size={"icon"}>
-                <ThumbsDown className="size-4 text-neutral-600" />
-              </Button>
-            </div>
-          </CardFooter>
-        </Card>
+            </CardFooter>
+          </Card>
+        )}
       </section>
     </>
   );
