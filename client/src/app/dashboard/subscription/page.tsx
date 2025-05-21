@@ -4,6 +4,7 @@ import LoadingSpinner from "@/components/loading-spinner";
 import SubscriptionTable from "@/components/subscription-table";
 import { Button } from "@/components/ui/button";
 import { usePayment } from "@/hooks/use-payment";
+import { addToSubscription } from "@/store/features/subscription-slice";
 import { addToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
 import { useUser } from "@clerk/nextjs";
@@ -36,6 +37,7 @@ const Page = () => {
   useEffect(() => {
     if (data && data.tokens > 0) {
       dispatch(addToken({ tokens: data.tokens }));
+      dispatch(addToSubscription({ data: data.subscriptionData }));
       toast(data.message);
     }
   }, [data]);
