@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import { sidebarReducer } from "./features/sidebar-slice";
 import { tokenReducer } from "./features/token-slice";
+import { subscriptionReducer } from "./features/subscription-slice";
 
 export const store = configureStore({
   reducer: {
     sidebar: sidebarReducer,
     token: tokenReducer,
+    subscription: subscriptionReducer,
   },
 });
 
