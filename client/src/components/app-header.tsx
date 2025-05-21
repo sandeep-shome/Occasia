@@ -11,6 +11,7 @@ import { initToken } from "@/store/features/token-slice";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { stat } from "fs";
+import { Skeleton } from "./ui/skeleton";
 
 function AppHeader() {
   const user = useUser();
@@ -37,7 +38,9 @@ function AppHeader() {
           <Separator orientation="vertical" className="mr-2 h-4" />
         </div>
         <div className="flex items-center gap-4">
-          {!pending && (
+          {pending ? (
+            <Skeleton className="w-20 h-5 rounded-full" />
+          ) : (
             <div
               className={cn(
                 "border rounded-full flex items-center gap-1 px-2 py-0.5",
