@@ -62,9 +62,6 @@ const Page = () => {
           )}
         </Button>
       </div>
-      {/* <div className="w-full h-96 flex items-center justify-center">
-        <span className="text-neutral-400">No Subscriptions</span>
-      </div> */}
       <SubscriptionTable />
     </>
   );
