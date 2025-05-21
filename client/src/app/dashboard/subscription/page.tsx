@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingSpinner from "@/components/loading-spinner";
+import SubscriptionTable from "@/components/subscription-table";
 import { Button } from "@/components/ui/button";
 import { usePayment } from "@/hooks/use-payment";
 import { addToken } from "@/store/features/token-slice";
@@ -59,9 +60,10 @@ const Page = () => {
           )}
         </Button>
       </div>
-      <div className="w-full h-96 flex items-center justify-center">
+      {/* <div className="w-full h-96 flex items-center justify-center">
         <span className="text-neutral-400">No Subscriptions</span>
-      </div>
+      </div> */}
+      <SubscriptionTable />
     </>
   );
 };
