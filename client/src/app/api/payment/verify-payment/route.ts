@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
 
   const isAuthentic = generatedSignature === razorpay_signature;
 
-  if (isAuthentic) {
+  if (!isAuthentic) {
     await prisma.subscription.create({
       data: {
         id: razorpay_order_id,
@@ -28,7 +28,13 @@ export const POST = async (req: NextRequest) => {
         tokens,
       },
     });
+    return NextResponse.json(
+      { message: "Unmatched signature!" },
+      { status: 400 }
+    );
+  }
 
+  try {
     await prisma.user.update({
       where: { id: userId },
       data: {
@@ -37,11 +43,10 @@ export const POST = async (req: NextRequest) => {
         },
       },
     });
-
     return NextResponse.json({ message: "Token purchased" });
-  } else {
+  } catch (error: any) {
     return NextResponse.json(
-      { message: "Unmatched signature!" },
+      { message: error.message || "Something went wrong while updating user!" },
       { status: 400 }
     );
   }
