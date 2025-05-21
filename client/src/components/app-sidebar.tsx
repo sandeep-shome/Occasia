@@ -39,7 +39,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const sidebarState = useAppSelector((state) => state.sidebar);
   const dispatch = useAppDispatch();
   const user = useUser();
-  const pathname = usePathname().split("/");
+  const pathname = usePathname();
+  const pathnameArr = usePathname().split("/");
   const router = useRouter();
 
   const { pending, error, getSidebarItems } = useSidebarItems();
@@ -88,7 +89,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuItem key={speech.id}>
                       <SidebarMenuButton
                         asChild
-                        isActive={speech.id === pathname[pathname.length - 1]}
+                        isActive={
+                          speech.id === pathnameArr[pathnameArr.length - 1]
+                        }
                       >
                         <Link href={`/dashboard/arena/${speech.id}`}>
                           {speech.title}
@@ -106,7 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild isActive={item.url === pathname}>
                       <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
