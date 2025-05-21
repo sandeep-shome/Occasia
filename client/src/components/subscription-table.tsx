@@ -15,6 +15,8 @@ import { useSubscription } from "@/hooks/use-subscription";
 import { useUser } from "@clerk/nextjs";
 import { Skeleton } from "./ui/skeleton";
 import { toast } from "sonner";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { setInitialSubscriptionState } from "@/store/features/subscription-slice";
 
 interface Subscription {
   id: String;
@@ -28,7 +30,10 @@ interface Subscription {
 const SubscriptionTable = () => {
   const { pending, error, getSubscriptions } = useSubscription();
   const user = useUser();
+  const dispatch = useAppDispatch();
+
   const [data, setData] = useState<Subscription[] | null>(null);
+  const subscriptionState = useAppSelector((state) => state.subscription);
 
   const handleGetSubscriptions = async () => {
     const res = await getSubscriptions(user.user?.id!);
@@ -37,6 +42,12 @@ const SubscriptionTable = () => {
       setData(res.data.data);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setInitialSubscriptionState({ data }));
+    }
+  }, [data]);
 
   useEffect(() => {
     if (error) {
@@ -85,8 +96,8 @@ const SubscriptionTable = () => {
                   </TableCell>
                 </TableRow>
               ))
-          ) : data && data.length > 0 ? (
-            data.map((invoice, index) => (
+          ) : subscriptionState.data && subscriptionState.data.length > 0 ? (
+            subscriptionState.data.map((invoice, index) => (
               <TableRow key={index}>
                 <TableCell className="font-medium">{invoice.id}</TableCell>
                 <TableCell>{invoice.tokens}</TableCell>
