@@ -6,23 +6,23 @@
       "items": [
         {
           "title": "Subscription",
-          "url": "#"
+          "url": "/dashboard/subscription"
         },
         {
           "title": "Settings",
-          "url": "#"
+          "url": "/dashboard/settings"
         },
         {
           "title": "Community",
-          "url": "#"
+          "url": "/dashboard/community"
         },
         {
           "title": "Examples",
-          "url": "#"
+          "url": "/dashboard/examples"
         },
         {
           "title": "Help",
-          "url": "#"
+          "url": "/dashboard/help"
         }
       ]
     }
