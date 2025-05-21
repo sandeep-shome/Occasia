@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 
 export const useGenerate = () => {
@@ -13,7 +13,7 @@ export const useGenerate = () => {
     setError(null);
     try {
       const res = await axios.get(`/api/generation/ai/${speechId}`);
-      return res;
+      return res as AxiosResponse;
     } catch (error: any) {
       setError({
         message: error.response.data.message,
