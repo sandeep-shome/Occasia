@@ -1,15 +1,26 @@
 import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 
+interface Subscription {
+  id: String;
+  tokens: number;
+  userId: String;
+  amount: number;
+  successful: Boolean;
+  createdAt: Date;
+}
+
 export const usePayment = () => {
   const [error, setError] = useState<{
     message: string;
     status: number;
   } | null>(null);
   const [pending, setPending] = useState<boolean>(false);
-  const [data, setData] = useState<{ message: string; tokens: number } | null>(
-    null
-  );
+  const [data, setData] = useState<{
+    message: string;
+    tokens: number;
+    subscriptionData: Subscription;
+  } | null>(null);
 
   const payment = async (tokens: number = 0, userId: string) => {
     setError(null);
