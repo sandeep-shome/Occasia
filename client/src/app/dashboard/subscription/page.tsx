@@ -8,8 +8,19 @@ import { addToSubscription } from "@/store/features/subscription-slice";
 import { addToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
 import { useUser } from "@clerk/nextjs";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 
 const Page = () => {
   useEffect(() => {
@@ -23,10 +34,10 @@ const Page = () => {
     };
   }, []);
 
-  const tokens: number = 20;
   const user = useUser();
   const dispatch = useAppDispatch();
   const { pending, error, data, payment } = usePayment();
+  const [tokens, setTokens] = useState<number>(20);
 
   useEffect(() => {
     if (error) {
@@ -50,17 +61,45 @@ const Page = () => {
     <>
       <div className="w-full flex items-center justify-between mb-10">
         <h3 className="text-sm font-semibold text-neutral-700">Subscription</h3>
-        <Button
-          onClick={handlePurchase}
-          disabled={pending}
-          className="min-w-36"
-        >
-          {pending ? (
-            <LoadingSpinner className="size-4" />
-          ) : (
-            "  Purchase tokens"
-          )}
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="min-w-32">Purchase tokens</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Add Tokens</DialogTitle>
+              <DialogDescription>
+                Make changes to your profile here. Click save when you're done.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-right">
+                  Tokens
+                </Label>
+                <div className="flex items-center justify-between gap-2">
+                  <Slider
+                    defaultValue={[tokens]}
+                    max={100}
+                    min={10}
+                    step={1}
+                    onValueChange={(e) => setTokens(e[0])}
+                  />
+                  <span className="text-sm text-neutral-600">{tokens}</span>
+                </div>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button onClick={handlePurchase} className="min-w-32">
+                {pending ? (
+                  <LoadingSpinner className="size-4" />
+                ) : (
+                  "Purchase token"
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
       <SubscriptionTable />
     </>
