@@ -46,7 +46,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center justify-between mb-10">
         <h3 className="text-sm font-semibold text-neutral-700">Subscription</h3>
         <Button
           onClick={handlePurchase}
