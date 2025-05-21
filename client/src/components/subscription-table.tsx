@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -14,27 +16,46 @@ import { useUser } from "@clerk/nextjs";
 import { Skeleton } from "./ui/skeleton";
 import { toast } from "sonner";
 
+interface Subscription {
+  id: String;
+  tokens: number;
+  userId: String;
+  amount: number;
+  successful: Boolean;
+  createdAt: Date;
+}
+
 const SubscriptionTable = () => {
-  const { pending, error, getSubscriptions, data } = useSubscription();
+  const { pending, error, getSubscriptions } = useSubscription();
   const user = useUser();
+  const [data, setData] = useState<Subscription[] | null>(null);
+
   const handleGetSubscriptions = async () => {
-    await getSubscriptions(user.user?.id!);
+    const res = await getSubscriptions(user.user?.id!);
+    if (res) {
+      console.log(res);
+      setData(res.data.data);
+    }
   };
 
   useEffect(() => {
-    toast.error(error?.message);
+    if (error) {
+      toast.error(error?.message);
+    }
   }, [error]);
 
   useEffect(() => {
-    handleGetSubscriptions();
-  }, []);
+    if (user.isLoaded) {
+      handleGetSubscriptions();
+    }
+  }, [user.isLoaded]);
   return (
     <>
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead className="">Invoice</TableHead>
             <TableHead>Tokens</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Date</TableHead>
@@ -42,39 +63,47 @@ const SubscriptionTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {pending
-            ? Array(4)
-                .fill(true)
-                .map((_, index) => (
-                  <TableRow key={index}>
-                    <TableCell>
-                      <Skeleton className="w-32 h-4" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="w-32 h-4" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="w-32 h-4" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="w-32 h-4" />
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Skeleton className="w-32 h-4" />
-                    </TableCell>
-                  </TableRow>
-                ))
-            : data?.map((invoice, index) => (
+          {pending ? (
+            Array(4)
+              .fill(true)
+              .map((_, index) => (
                 <TableRow key={index}>
-                  <TableCell className="font-medium">{invoice.id}</TableCell>
-                  <TableCell>{invoice.tokens}</TableCell>
                   <TableCell>
-                    {invoice.successful ? "Success" : "Failed"}
+                    <Skeleton className="w-32 h-4" />
                   </TableCell>
-                  <TableCell>{invoice.createdAt.toDateString()}</TableCell>
-                  <TableCell className="text-right">{invoice.amount}</TableCell>
+                  <TableCell>
+                    <Skeleton className="w-32 h-4" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-32 h-4" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-32 h-4" />
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Skeleton className="w-32 h-4" />
+                  </TableCell>
                 </TableRow>
-              ))}
+              ))
+          ) : data && data.length > 0 ? (
+            data.map((invoice, index) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium">{invoice.id}</TableCell>
+                <TableCell>{invoice.tokens}</TableCell>
+                <TableCell>
+                  {invoice.successful ? "Success" : "Failed"}
+                </TableCell>
+                <TableCell>
+                  {invoice.createdAt.toString().split("T")[0]}
+                </TableCell>
+                <TableCell className="text-right">{invoice.amount}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableCell colSpan={5} className="text-center py-10">
+              No Subscriptions
+            </TableCell>
+          )}
         </TableBody>
       </Table>
     </>
