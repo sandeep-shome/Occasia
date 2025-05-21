@@ -43,7 +43,7 @@ export const POST = async (req: NextRequest) => {
         },
       },
     });
-    return NextResponse.json({ message: "Token purchased" });
+    return NextResponse.json({ message: "Token purchased", tokens });
   } catch (error: any) {
     return NextResponse.json(
       { message: error.message || "Something went wrong while updating user!" },
