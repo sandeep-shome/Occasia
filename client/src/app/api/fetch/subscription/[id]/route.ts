@@ -11,6 +11,9 @@ export const GET = async (
       where: {
         userId,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return NextResponse.json({ data });
   } catch (err) {
