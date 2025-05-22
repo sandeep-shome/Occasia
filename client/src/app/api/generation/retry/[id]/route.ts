@@ -31,8 +31,6 @@ export const GET = async (
     const {
       name,
       id,
-      liked,
-      disliked,
       regenerationCount,
       userId,
       result,
