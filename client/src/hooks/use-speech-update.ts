@@ -6,7 +6,7 @@ export const useSpeechUpdate = () => {
     message: string;
     status: number;
   } | null>(null);
-  const [pending, setPending] = useState<boolean>(true);
+  const [pending, setPending] = useState<boolean>(false);
 
   async function updateMessage(speechId: string, updatedResult: string) {
     setPending(true);
