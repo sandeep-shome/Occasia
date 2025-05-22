@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export const updateSpeechData = () => {
+export const useSpeechUpdate = () => {
   const [error, setError] = useState<{
     message: string;
     status: number;
