@@ -13,7 +13,6 @@ import {
 import { useGenerate } from "@/hooks/use-generate";
 import { deductToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
-import { SpeechData } from "@/types";
 import { AxiosResponse } from "axios";
 import {
   Clipboard,
