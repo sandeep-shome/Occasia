@@ -15,7 +15,7 @@ const CopyButton = ({ data }: { data: string }) => {
   };
 
   return (
-    <Button variant={"outline"} size={"icon"} onClick={handleCopy}>
+    <Button variant={"ghost"} size={"icon"} onClick={handleCopy}>
       {copied ? (
         <ClipboardCheck className="size-4 text-neutral-600" />
       ) : (
