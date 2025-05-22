@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 
-const CopyButton = (data: string) => {
+const CopyButton = ({ data }: { data: string }) => {
   const [copied, setCopied] = useState<boolean>(false);
   const handleCopy = () => {
     setCopied(true);
