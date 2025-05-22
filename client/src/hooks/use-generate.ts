@@ -8,11 +8,11 @@ export const useGenerate = () => {
     status: number;
   } | null>(null);
 
-  async function getSpeech(speechId: string) {
+  async function generateSpeech(speechId: string) {
     setPending(true);
     setError(null);
     try {
-      const res = await axios.get(`/api/generation/ai/${speechId}`);
+      const res = await axios.get(`/api/generation/generate/${speechId}`);
       return res as AxiosResponse;
     } catch (error: any) {
       setError({
@@ -24,5 +24,21 @@ export const useGenerate = () => {
     }
   }
 
-  return { pending, error, getSpeech };
+  async function retryToGenerateSpeech(speechId: string) {
+    setPending(true);
+    setError(null);
+    try {
+      const res = await axios.get(`/api/generation/retry/${speechId}`);
+      return res as AxiosResponse;
+    } catch (error: any) {
+      setError({
+        message: error.response.data.message,
+        status: error.response.status,
+      });
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return { pending, error, generateSpeech, retryToGenerateSpeech };
 };
