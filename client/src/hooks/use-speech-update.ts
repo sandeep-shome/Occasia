@@ -1,0 +1,26 @@
+import axios from "axios";
+import { useState } from "react";
+
+export const updateSpeechData = () => {
+  const [error, setError] = useState<{
+    message: string;
+    status: number;
+  } | null>(null);
+  const [pending, setPending] = useState<boolean>(true);
+
+  async function updateMessage(speechId: string, updatedResult: string) {
+    try {
+      const res = await axios.get(`/api/speech/update/${speechId}`);
+      return res;
+    } catch (error: any) {
+      setError({
+        message: error.response.data.message,
+        status: error.response.status,
+      });
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return { updateMessage, pending, error };
+};
