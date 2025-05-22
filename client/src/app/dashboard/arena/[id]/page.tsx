@@ -116,16 +116,6 @@ function page() {
             <CardContent className="space-y-5">
               {<div className="">{speechData?.data.result}</div>}
             </CardContent>
-            <CardFooter>
-              <div className="flex items-center gap-2">
-                <Button variant={"outline"} size={"icon"}>
-                  <ThumbsUp className="size-4 text-neutral-600" />
-                </Button>
-                <Button variant={"outline"} size={"icon"}>
-                  <ThumbsDown className="size-4 text-neutral-600" />
-                </Button>
-              </div>
-            </CardFooter>
           </Card>
         )}
       </section>
