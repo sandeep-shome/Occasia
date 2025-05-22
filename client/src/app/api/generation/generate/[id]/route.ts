@@ -40,8 +40,6 @@ export async function GET(
     const {
       name,
       id,
-      liked,
-      disliked,
       regenerationCount,
       userId,
       result,
