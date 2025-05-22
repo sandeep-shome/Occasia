@@ -12,7 +12,9 @@ export const useSpeechUpdate = () => {
     setPending(true);
     setError(null);
     try {
-      const res = await axios.get(`/api/speech/update/${speechId}`);
+      const res = await axios.put(`/api/speech/update/${speechId}`, {
+        message: updatedResult,
+      });
       return res;
     } catch (error: any) {
       setError({
