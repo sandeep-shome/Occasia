@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useGenerate } from "@/hooks/use-generate";
 import { deductToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
@@ -30,13 +29,19 @@ import { toast } from "sonner";
 
 function page() {
   const params = useParams<{ id: string }>();
-  const { pending, error, getSpeech } = useGenerate();
+  const { pending, error, generateSpeech, retryToGenerateSpeech } =
+    useGenerate();
   const dispatch = useAppDispatch();
 
   const [speechData, setSpeechData] = useState<AxiosResponse | null>();
 
   const handleGenerateSpeech = async () => {
-    const data = await getSpeech(params.id);
+    const data = await generateSpeech(params.id);
+    setSpeechData(data);
+  };
+
+  const handleRetryToGenerateSpeech = async () => {
+    const data = await retryToGenerateSpeech(params.id);
     setSpeechData(data);
   };
 
@@ -77,7 +82,11 @@ function page() {
               tokens will be deducted for this failed message{" "}
             </CardContent>
             <CardFooter>
-              <Button variant={"outline"} size={"icon"}>
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={handleRetryToGenerateSpeech}
+              >
                 <RotateCcw className="size-4 text-neutral-600" />
               </Button>
             </CardFooter>
