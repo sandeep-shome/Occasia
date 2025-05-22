@@ -30,8 +30,6 @@ model Speech {
   duration          Int      @default(2)
   result            String   @default("")
   isFailed          Boolean  @default(false)
-  liked             Boolean  @default(false)
-  disliked          Boolean  @default(false)
   regenerationCount Int      @default(0)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
