@@ -9,6 +9,8 @@ export const useSpeechUpdate = () => {
   const [pending, setPending] = useState<boolean>(true);
 
   async function updateMessage(speechId: string, updatedResult: string) {
+    setPending(true);
+    setError(null);
     try {
       const res = await axios.get(`/api/speech/update/${speechId}`);
       return res;
