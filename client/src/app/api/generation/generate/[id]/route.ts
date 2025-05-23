@@ -47,7 +47,17 @@ export async function GET(
       updatedAt,
       ...payloadData
     } = speechData;
-    const message = await generateMessage(payloadData);
+
+    const content = `Your task is to generate a compelling, coherent, and impactful speech based on the user's input. The user will provide:
+                - A prompt or context: ${
+                  payloadData.generalPrompt + " " + payloadData.internalPrompt
+                }.
+                - The desired language: ${payloadData.lang}.
+                - The approximate word count or duration in number of words: ${
+                  payloadData.duration * 120
+                }`;
+
+    const message = await generateMessage(content);
 
     // storing speech data
 
