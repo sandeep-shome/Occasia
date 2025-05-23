@@ -37,11 +37,13 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
 }) => {
   const tokenState = useAppSelector((state) => state.token);
   const handleOnRegenerateClick = () => {
-    if (tokenState.tokens < 1) {
-      toast.error("Insufficient tokens!", {
-        description: "Please purchase tokens before you proceed",
-      });
-      return;
+    if (regenerationCount > 0) {
+      if (tokenState.tokens < 1) {
+        toast.error("Insufficient tokens!", {
+          description: "Please purchase tokens before you proceed",
+        });
+        return;
+      }
     }
     handleGeneration();
   };
