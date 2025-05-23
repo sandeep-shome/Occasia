@@ -3,7 +3,13 @@ import { Button } from "./ui/button";
 import { Download } from "lucide-react";
 import { jsPDF } from "jspdf";
 
-const DownloadButton = ({ message }: { message: string }) => {
+const DownloadButton = ({
+  message,
+  name,
+}: {
+  message: string;
+  name: string;
+}) => {
   const handleDownloadSpeech = () => {
     const doc = new jsPDF();
 
@@ -28,7 +34,7 @@ const DownloadButton = ({ message }: { message: string }) => {
       y += lineHeight;
     }
 
-    doc.save("speech.pdf");
+    doc.save(`${name}.pdf`);
   };
   return (
     <>
