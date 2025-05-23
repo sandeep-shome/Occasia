@@ -78,7 +78,10 @@ function page() {
         ) : error != null ? (
           <MessageError retryHandler={handleRetryToGenerateSpeech} />
         ) : (
-          <MessageCard speechData={speechData?.data} />
+          <MessageCard
+            speechData={speechData?.data}
+            handleRegeneration={handleRegenerateSpeech}
+          />
         )}
       </section>
     </>
