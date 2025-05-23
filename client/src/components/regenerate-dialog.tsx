@@ -44,30 +44,18 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="space-y-1.5">
+          <div className="space-y-3">
             <Label htmlFor="suggestion" className="text-right">
               Suggestions
             </Label>
             <Textarea
               id="suggestion"
               value={suggestions}
+              placeholder="Enter on which part you want to improvement"
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setSuggestions(e.target.value)
               }
-              className="col-span-3 h-48 resize-none"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="suggestion" className="text-right">
-              Suggestions
-            </Label>
-            <Textarea
-              id="suggestion"
-              value={suggestions}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                setSuggestions(e.target.value)
-              }
-              className="col-span-3 h-48 resize-none"
+              className="col-span-3 h-32 resize-none"
             />
           </div>
           <div className="space-y-1.5">

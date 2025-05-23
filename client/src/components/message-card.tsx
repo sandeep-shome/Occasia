@@ -17,14 +17,29 @@ import { cn } from "@/lib/utils";
 import { useSpeechUpdate } from "@/hooks/use-speech-update";
 import { toast } from "sonner";
 import LoadingSpinner from "./loading-spinner";
+import RegenerateDialog from "./regenerate-dialog";
 
 interface MessageCardProps {
   speechData: SpeechData;
+  handleRegeneration: (
+    suggestions: string,
+    duration: number,
+    currentMessage: string
+  ) => void;
 }
 
-const MessageCard: React.FC<MessageCardProps> = ({ speechData }) => {
+const MessageCard: React.FC<MessageCardProps> = ({
+  speechData,
+  handleRegeneration,
+}) => {
   const [speechResult, setSpeechResult] = useState<string>(speechData?.result);
   const [editable, setEditable] = useState<boolean>(false);
+  const [suggestions, setSuggestions] = useState<string>("");
+  const [duration, setDuration] = useState<number>(5);
+
+  const regenerationHandler = () => {
+    handleRegeneration(suggestions, duration, speechResult);
+  };
 
   const { pending, error, updateMessage } = useSpeechUpdate();
 
@@ -75,9 +90,13 @@ const MessageCard: React.FC<MessageCardProps> = ({ speechData }) => {
           </div>
           <div className="flex items-center gap-0.5">
             <CopyButton data={speechResult} />
-            <Button variant={"ghost"} size={"icon"}>
-              <RotateCcw className="size-4 text-neutral-600" />
-            </Button>
+            <RegenerateDialog
+              suggestions={suggestions}
+              duration={duration}
+              setSuggestions={setSuggestions}
+              setDuration={setDuration}
+              handleGeneration={regenerationHandler}
+            />
             <Button variant={"ghost"} size={"icon"}>
               <Download className="size-4 text-neutral-600" />
             </Button>
