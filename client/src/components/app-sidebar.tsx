@@ -25,7 +25,6 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets/logo.svg";
 import { Button } from "./ui/button";
-import { Progress } from "./ui/progress";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import staticData from "@/data/static-sidebar.json";
 import { useSidebarItems } from "@/hooks/use-sidebar-items";
@@ -34,6 +33,7 @@ import { setInitialState } from "@/store/features/sidebar-slice";
 import { Skeleton } from "./ui/skeleton";
 import { useUser } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
+import { Badge } from "./ui/badge";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const sidebarState = useAppSelector((state) => state.sidebar);
@@ -110,7 +110,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={item.url === pathname}>
-                      <Link href={item.url}>{item.title}</Link>
+                      <Link href={item.url}>
+                        {item.title}{" "}
+                        {item.future === "1" && (
+                          <Badge variant={"secondary"}>Future Updates</Badge>
+                        )}
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -122,7 +127,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <Card className="shadow-none">
           <div>
-            <CardContent className="grid gap-2.5 p-4">
+            <CardContent className="grid gap-2.5 px-4">
               <Button
                 className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
                 size="sm"
