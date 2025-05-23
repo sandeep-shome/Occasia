@@ -6,6 +6,7 @@ import MessageSkeleton from "@/components/message-skeleton";
 import { useGenerate } from "@/hooks/use-generate";
 import { deductToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
+import { useUser } from "@clerk/nextjs";
 import { AxiosResponse } from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -23,6 +24,7 @@ function page() {
   const dispatch = useAppDispatch();
 
   const [speechData, setSpeechData] = useState<AxiosResponse | null>();
+  const user = useUser();
 
   const handleGenerateSpeech = async () => {
     const data = await generateSpeech(params.id);
@@ -78,6 +80,7 @@ function page() {
         ) : (
           <MessageCard
             speechData={speechData?.data}
+            userId={user.user?.id || ""}
             handleRegeneration={handleRegenerateSpeech}
           />
         )}
