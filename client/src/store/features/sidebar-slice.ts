@@ -48,5 +48,6 @@ const sidebarSlice = createSlice({
   },
 });
 
-export const { setInitialState, addSidebarItem } = sidebarSlice.actions;
+export const { setInitialState, addSidebarItem, removeSidebarItem } =
+  sidebarSlice.actions;
 export const sidebarReducer = sidebarSlice.reducer;
