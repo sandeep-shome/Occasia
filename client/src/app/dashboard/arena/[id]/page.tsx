@@ -13,8 +13,13 @@ import { toast } from "sonner";
 
 function page() {
   const params = useParams<{ id: string }>();
-  const { pending, error, generateSpeech, retryToGenerateSpeech } =
-    useGenerate();
+  const {
+    pending,
+    error,
+    generateSpeech,
+    retryToGenerateSpeech,
+    regenerateSpeech,
+  } = useGenerate();
   const dispatch = useAppDispatch();
 
   const [speechData, setSpeechData] = useState<AxiosResponse | null>();
@@ -27,6 +32,26 @@ function page() {
   const handleRetryToGenerateSpeech = async () => {
     const data = await retryToGenerateSpeech(params.id);
     setSpeechData(data);
+  };
+
+  const handleRegenerateSpeech = async (
+    suggestions: string,
+    lang: string,
+    duration: number,
+    currentMessage: string
+  ) => {
+    if (speechData != null) {
+      const data = await regenerateSpeech(
+        params.id,
+        currentMessage,
+        lang,
+        duration,
+        suggestions
+      );
+      setSpeechData(data);
+    } else {
+      toast.error("Method can't be called!");
+    }
   };
 
   useEffect(() => {
