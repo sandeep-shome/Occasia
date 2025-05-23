@@ -28,7 +28,34 @@ export const useGenerate = () => {
     setPending(true);
     setError(null);
     try {
-      const res = await axios.get(`/api/generation/retry/${speechId}`);
+      const res = await axios.get(`/api/speech/retry/${speechId}`);
+      return res as AxiosResponse;
+    } catch (error: any) {
+      setError({
+        message: error.response.data.message,
+        status: error.response.status,
+      });
+    } finally {
+      setPending(false);
+    }
+  }
+
+  async function RegenerateSpeech(
+    speechId: string,
+    currentSpeech: string,
+    lang: string,
+    duration: number,
+    suggestions: string
+  ) {
+    setPending(true);
+    setError(null);
+    try {
+      const res = await axios.put(`/api/speech/re-generate/${speechId}`, {
+        result: currentSpeech,
+        suggestions,
+        duration,
+        lang,
+      });
       return res as AxiosResponse;
     } catch (error: any) {
       setError({
