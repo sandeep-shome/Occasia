@@ -8,11 +8,7 @@ export const useSpeechDelete = () => {
   } | null>(null);
   const [pending, setPending] = useState<boolean>(false);
 
-  async function deleteMessage(
-    speechId: string,
-    userId: string,
-    updatedResult: string
-  ) {
+  async function deleteMessage(speechId: string, userId: string) {
     setPending(true);
     setError(null);
     try {
