@@ -11,22 +11,16 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { SpeechData } from "@/types";
-import { Download, EllipsisVertical, Pen, Save, Trash } from "lucide-react";
+import { Pen, Save } from "lucide-react";
 import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
 import { useSpeechUpdate } from "@/hooks/use-speech-update";
 import { toast } from "sonner";
 import LoadingSpinner from "./loading-spinner";
 import RegenerateDialog from "./regenerate-dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import DownloadButton from "./download-button";
+import { useSpeechDelete } from "@/hooks/use-speech-delete";
+import DeleteButton from "./delete-button";
 
 interface MessageCardProps {
   speechData: SpeechData;
@@ -40,6 +34,7 @@ interface MessageCardProps {
 
 const MessageCard: React.FC<MessageCardProps> = ({
   speechData,
+  userId,
   handleRegeneration,
 }) => {
   const [speechResult, setSpeechResult] = useState<string>(speechData?.result);
@@ -52,6 +47,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
   };
 
   const { pending, error, updateMessage } = useSpeechUpdate();
+  const {
+    pending: deletePending,
+    error: deleteError,
+    deleteMessage,
+  } = useSpeechDelete();
 
   const handleUpdateMessage = async () => {
     const res = await updateMessage(speechData.id, speechResult);
@@ -59,6 +59,19 @@ const MessageCard: React.FC<MessageCardProps> = ({
       setEditable(false);
     }
   };
+
+  const handleDeleteSpeech = async () => {
+    const res = await deleteMessage(speechData.id, userId);
+    if (res) {
+      toast("Speech deleted");
+    }
+  };
+
+  useEffect(() => {
+    if (deleteError) {
+      toast.error(deleteError.message);
+    }
+  }, [deleteError]);
 
   useEffect(() => {
     if (error) {
@@ -109,22 +122,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
               regenerationCount={speechData?.regenerationCount}
             />
             <DownloadButton message={speechResult} name={speechData?.name} />
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                className={buttonVariants({ variant: "ghost", size: "icon" })}
-              >
-                {" "}
-                <EllipsisVertical className="size-4 text-neutral-600" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>Options</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex items-center gap-2">
-                  <Trash className="size-4" />
-                  Delete{" "}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <DeleteButton
+              pending={deletePending}
+              handleDelete={handleDeleteSpeech}
+            />
           </div>
         </div>
       </CardHeader>
