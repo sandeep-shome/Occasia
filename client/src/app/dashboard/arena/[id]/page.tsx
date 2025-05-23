@@ -36,7 +36,6 @@ function page() {
 
   const handleRegenerateSpeech = async (
     suggestions: string,
-    lang: string,
     duration: number,
     currentMessage: string
   ) => {
@@ -44,7 +43,6 @@ function page() {
       const data = await regenerateSpeech(
         params.id,
         currentMessage,
-        lang,
         duration,
         suggestions
       );
