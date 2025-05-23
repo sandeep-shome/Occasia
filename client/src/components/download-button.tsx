@@ -6,8 +6,29 @@ import { jsPDF } from "jspdf";
 const DownloadButton = ({ message }: { message: string }) => {
   const handleDownloadSpeech = () => {
     const doc = new jsPDF();
-    doc.text(message, 10, 10);
-    doc.save();
+
+    const margin = 15;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const maxLineWidth = pageWidth - margin * 2;
+    const lineHeight = 8;
+    let y = margin;
+
+    doc.setFontSize(12);
+
+    // Split the text into lines that fit the width
+    const lines = doc.splitTextToSize(message, maxLineWidth);
+
+    for (let i = 0; i < lines.length; i++) {
+      if (y + lineHeight > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(lines[i], margin, y);
+      y += lineHeight;
+    }
+
+    doc.save("speech.pdf");
   };
   return (
     <>
