@@ -107,7 +107,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
               handleGeneration={regenerationHandler}
               regenerationCount={speechData?.regenerationCount}
             />
-            <DownloadButton message={speechResult} />
+            <DownloadButton message={speechResult} name={speechData?.name} />
             <DropdownMenu>
               <DropdownMenuTrigger
                 className={buttonVariants({ variant: "ghost", size: "icon" })}
