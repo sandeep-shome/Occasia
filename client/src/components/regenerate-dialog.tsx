@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -13,6 +15,8 @@ import { Copyright, RotateCcw } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Slider } from "./ui/slider";
+import { useAppSelector } from "@/store/store";
+import { toast } from "sonner";
 
 interface RegenerateDialog {
   suggestions: string;
@@ -31,6 +35,14 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
   handleGeneration,
   regenerationCount = 0,
 }) => {
+  const tokenState = useAppSelector((state) => state.token);
+  const handleOnRegenerateClick = () => {
+    if (tokenState.tokens < 1) {
+      toast.error("Insufficient tokens!");
+      return;
+    }
+    handleGeneration();
+  };
   return (
     <Dialog>
       <DialogTrigger
@@ -77,7 +89,7 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleGeneration}>
+          <Button onClick={handleOnRegenerateClick}>
             Regenerate
             <div className="flex items-center justify-center gap-1">
               <Copyright className="size-4 mt-[1px]" />
