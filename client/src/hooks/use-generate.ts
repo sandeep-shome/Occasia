@@ -40,7 +40,7 @@ export const useGenerate = () => {
     }
   }
 
-  async function regenerateSpeech(
+  async function RegenerateSpeech(
     speechId: string,
     currentSpeech: string,
     lang: string,
@@ -67,11 +67,5 @@ export const useGenerate = () => {
     }
   }
 
-  return {
-    pending,
-    error,
-    generateSpeech,
-    retryToGenerateSpeech,
-    regenerateSpeech,
-  };
+  return { pending, error, generateSpeech, retryToGenerateSpeech };
 };
