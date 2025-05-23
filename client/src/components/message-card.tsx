@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,6 +21,9 @@ import RegenerateDialog from "./regenerate-dialog";
 import DownloadButton from "./download-button";
 import { useSpeechDelete } from "@/hooks/use-speech-delete";
 import DeleteButton from "./delete-button";
+import { useAppDispatch } from "@/store/store";
+import { removeSidebarItem } from "@/store/features/sidebar-slice";
+import { useRouter } from "next/navigation";
 
 interface MessageCardProps {
   speechData: SpeechData;
@@ -41,6 +44,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
   const [editable, setEditable] = useState<boolean>(false);
   const [suggestions, setSuggestions] = useState<string>("");
   const [duration, setDuration] = useState<number>(5);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const regenerationHandler = () => {
     handleRegeneration(suggestions, duration, speechResult);
@@ -63,7 +68,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
   const handleDeleteSpeech = async () => {
     const res = await deleteMessage(speechData.id, userId);
     if (res) {
-      toast("Speech deleted");
+      dispatch(removeSidebarItem({ id: speechData.id }));
+      router.back();
     }
   };
 
