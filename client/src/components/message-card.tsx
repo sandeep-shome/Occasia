@@ -96,6 +96,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
               setSuggestions={setSuggestions}
               setDuration={setDuration}
               handleGeneration={regenerationHandler}
+              regenerationCount={speechData.regenerationCount}
             />
             <Button variant={"ghost"} size={"icon"}>
               <Download className="size-4 text-neutral-600" />

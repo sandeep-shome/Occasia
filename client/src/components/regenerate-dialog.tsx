@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { RotateCcw } from "lucide-react";
+import { Copyright, RotateCcw } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Slider } from "./ui/slider";
@@ -20,6 +20,7 @@ interface RegenerateDialog {
   duration: number;
   setDuration: (param: any) => void;
   handleGeneration: () => void;
+  regenerationCount: number;
 }
 
 const RegenerateDialog: React.FC<RegenerateDialog> = ({
@@ -28,6 +29,7 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
   duration,
   setDuration,
   handleGeneration,
+  regenerationCount,
 }) => {
   return (
     <Dialog>
@@ -38,9 +40,9 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Regenerate</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to improve your speech
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -75,7 +77,13 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleGeneration}>Regenerate</Button>
+          <Button onClick={handleGeneration}>
+            Regenerate
+            <div className="flex items-center gap-1">
+              <Copyright className="size-4" />
+              {regenerationCount > 0 ? "1" : "0"}
+            </div>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
