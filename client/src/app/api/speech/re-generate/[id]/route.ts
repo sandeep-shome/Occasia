@@ -32,7 +32,6 @@ export const PUT = async (
     const content = `You are an expert speechwriter. Regenerate the following speech based on the user's suggestions. Ensure that the tone, flow, and structure remain coherent and natural. The final output should match the requested word limit and language.
                     - Original Speech: ${speechData.result}
                     - User Suggestions for Revision: ${body.suggestions}
-                    - Preferred Language: ${body.lang}
                     - Word Limit: ${(body.duration as number) * 120} words
     `;
 
