@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,13 +11,22 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { SpeechData } from "@/types";
-import { Download, EllipsisVertical, Pen, RotateCcw, Save } from "lucide-react";
+import { Download, EllipsisVertical, Pen, Save, Trash } from "lucide-react";
 import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
 import { useSpeechUpdate } from "@/hooks/use-speech-update";
 import { toast } from "sonner";
 import LoadingSpinner from "./loading-spinner";
 import RegenerateDialog from "./regenerate-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import DownloadButton from "./download-button";
 
 interface MessageCardProps {
   speechData: SpeechData;
@@ -98,12 +107,23 @@ const MessageCard: React.FC<MessageCardProps> = ({
               handleGeneration={regenerationHandler}
               regenerationCount={speechData?.regenerationCount}
             />
-            <Button variant={"ghost"} size={"icon"}>
-              <Download className="size-4 text-neutral-600" />
-            </Button>
-            <Button variant={"ghost"} size={"icon"}>
-              <EllipsisVertical className="size-4 text-neutral-600" />
-            </Button>
+            <DownloadButton message={speechResult} />
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                className={buttonVariants({ variant: "ghost", size: "icon" })}
+              >
+                {" "}
+                <EllipsisVertical className="size-4 text-neutral-600" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Options</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="flex items-center gap-2">
+                  <Trash className="size-4" />
+                  Delete{" "}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </CardHeader>
