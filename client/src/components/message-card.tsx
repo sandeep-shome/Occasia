@@ -30,6 +30,7 @@ import DownloadButton from "./download-button";
 
 interface MessageCardProps {
   speechData: SpeechData;
+  userId: string;
   handleRegeneration: (
     suggestions: string,
     duration: number,
