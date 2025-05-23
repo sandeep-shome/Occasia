@@ -39,6 +39,12 @@ const sidebarSlice = createSlice({
         id: action.payload.id,
       });
     },
+    removeSidebarItem: (state, action: PayloadAction<{ id: string }>) => {
+      const filteredItems = state.items.filter(
+        (item) => item.id != action.payload.id
+      );
+      state.items = filteredItems;
+    },
   },
 });
 
