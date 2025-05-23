@@ -10,19 +10,23 @@
         },
         {
           "title": "Settings",
-          "url": "/dashboard/settings"
+          "url": "/dashboard/settings",
+          "future": "1"
         },
         {
           "title": "Community",
-          "url": "/dashboard/community"
+          "url": "/dashboard/community",
+          "future": "1"
         },
         {
           "title": "Examples",
-          "url": "/dashboard/examples"
+          "url": "/dashboard/examples",
+          "future": "1"
         },
         {
           "title": "Help",
-          "url": "/dashboard/help"
+          "url": "/dashboard/help",
+          "future": "1"
         }
       ]
     }
