@@ -43,7 +43,6 @@ export const useGenerate = () => {
   async function regenerateSpeech(
     speechId: string,
     currentSpeech: string,
-    lang: string,
     duration: number,
     suggestions: string
   ) {
@@ -54,7 +53,6 @@ export const useGenerate = () => {
         result: currentSpeech,
         suggestions,
         duration,
-        lang,
       });
       return res as AxiosResponse;
     } catch (error: any) {
