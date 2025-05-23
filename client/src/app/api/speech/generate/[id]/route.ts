@@ -20,14 +20,6 @@ export async function GET(
       );
     }
 
-    if (speechData.regenerationCount > 0) {
-      // Sending error if it's a regeneration request
-      return NextResponse.json(
-        { message: "Error: too much tries" },
-        { status: 405 }
-      );
-    }
-
     if (speechData.isFailed) {
       // Sending error if it's a failed request
       return NextResponse.json({ message: "Error: failed" }, { status: 418 });
