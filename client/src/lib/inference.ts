@@ -1,9 +1,8 @@
-import { GenerationPayload } from "@/types";
 import { InferenceClient } from "@huggingface/inference";
 
 const client = new InferenceClient(process.env.HF_TOKEN!);
 
-export const generateMessage = async (data: GenerationPayload) => {
+export const generateMessage = async (content: string) => {
   const chatCompletion = await client.chatCompletion({
     provider: "novita",
     model: "meta-llama/Llama-3.2-3B-Instruct",
@@ -23,15 +22,8 @@ export const generateMessage = async (data: GenerationPayload) => {
         `,
       },
       {
-        role: "",
-        content: `Your task is to generate a compelling, coherent, and impactful speech based on the user's input. The user will provide:
-                - A prompt or context: ${
-                  data.generalPrompt + " " + data.internalPrompt
-                }.
-                - The desired language: ${data.lang}.
-                - The approximate word count or duration in number of words: ${
-                  data.duration * 120
-                }`,
+        role: "user",
+        content: content,
       },
     ],
   });
