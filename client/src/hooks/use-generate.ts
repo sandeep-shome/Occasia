@@ -12,7 +12,7 @@ export const useGenerate = () => {
     setPending(true);
     setError(null);
     try {
-      const res = await axios.get(`/api/generation/generate/${speechId}`);
+      const res = await axios.get(`/api/speech/generate/${speechId}`);
       return res as AxiosResponse;
     } catch (error: any) {
       setError({
