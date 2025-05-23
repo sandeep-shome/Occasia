@@ -29,7 +29,7 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
   duration,
   setDuration,
   handleGeneration,
-  regenerationCount,
+  regenerationCount = 0,
 }) => {
   return (
     <Dialog>
@@ -79,8 +79,8 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
         <DialogFooter>
           <Button onClick={handleGeneration}>
             Regenerate
-            <div className="flex items-center gap-1">
-              <Copyright className="size-4" />
+            <div className="flex items-center justify-center gap-1">
+              <Copyright className="size-4 mt-[1px]" />
               {regenerationCount > 0 ? "1" : "0"}
             </div>
           </Button>
