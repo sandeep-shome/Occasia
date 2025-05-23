@@ -1,3 +1,4 @@
+import { generateMessage } from "@/lib/inference";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -22,9 +23,20 @@ export const PUT = async (
       );
     }
 
+    if (speechData.isFailed) {
+      // Sending error if it's a failed request
+      return NextResponse.json({ message: "Error: failed" }, { status: 418 });
+    }
+
     // Regenerating message
-    //TODO: implement AI message generation
-    const message = "something after update";
+    const content = `You are an expert speechwriter. Regenerate the following speech based on the user's suggestions. Ensure that the tone, flow, and structure remain coherent and natural. The final output should match the requested word limit and language.
+                    - Original Speech: ${speechData.result}
+                    - User Suggestions for Revision: ${body.suggestions}
+                    - Preferred Language: ${body.lang}
+                    - Word Limit: ${(body.duration as number) * 120} words
+    `;
+
+    const message = (await generateMessage(content)).content;
 
     const updatedSpeechData = await prisma.speech.update({
       where: {
@@ -32,6 +44,8 @@ export const PUT = async (
       },
       data: {
         result: message,
+        lang: body.lang,
+        duration: body.duration,
         regenerationCount: {
           increment: 1,
         },
@@ -50,16 +64,10 @@ export const PUT = async (
         },
       });
 
-      return NextResponse.json(
-        { message: "Speech regenerated" },
-        { status: 201 }
-      );
+      return NextResponse.json(updatedSpeechData, { status: 201 });
     }
 
-    return NextResponse.json(
-      { message: "Speech regenerated" },
-      { status: 200 }
-    );
+    return NextResponse.json(updatedSpeechData, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message }, { status: 400 });
