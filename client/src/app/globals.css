@@ -119,4 +119,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  .bg-blur {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+  }
 }
