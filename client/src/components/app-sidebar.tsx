@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/assets/logo.svg";
 import { Button } from "./ui/button";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import staticData from "@/data/static-sidebar.json";
@@ -66,7 +65,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <div className="w-full flex items-center justify-between px-2 py-2">
           <Link href={"/"}>
-            <Image src={logo} alt="logo" width={90} />
+            <Image src={"logo.svg"} alt="logo" width={90} />
           </Link>
         </div>
       </SidebarHeader>
