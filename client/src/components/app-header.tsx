@@ -12,6 +12,8 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { stat } from "fs";
 import { Skeleton } from "./ui/skeleton";
+import Link from "next/link";
+import { ModeToggle } from "./theme-toogler";
 
 function AppHeader() {
   const user = useUser();
@@ -39,20 +41,22 @@ function AppHeader() {
         </div>
         <div className="flex items-center gap-4">
           {pending ? (
-            <Skeleton className="w-20 h-5 rounded-full" />
+            <Skeleton className="w-12 h-5 rounded-full" />
           ) : (
-            <div
+            <Link
+              href="/dashboard/subscription"
               className={cn(
                 "border rounded-full flex items-center gap-1 px-2 py-0.5",
                 state.tokens > 0
-                  ? "border-neutral-400 text-neutral-600"
+                  ? "border-secondary text-primary"
                   : "border-red-400 text-red-400"
               )}
             >
               <Copyright className="size-4" />
               <span className="text-sm">{state.tokens}</span>
-            </div>
+            </Link>
           )}
+          <ModeToggle />
           <SignedIn>
             <UserButton />
           </SignedIn>

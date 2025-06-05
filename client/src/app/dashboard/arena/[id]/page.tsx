@@ -3,11 +3,13 @@
 import MessageCard from "@/components/message-card";
 import MessageError from "@/components/message-error";
 import MessageSkeleton from "@/components/message-skeleton";
+import { buttonVariants } from "@/components/ui/button";
 import { useGenerate } from "@/hooks/use-generate";
 import { deductToken } from "@/store/features/token-slice";
 import { useAppDispatch } from "@/store/store";
 import { useUser } from "@clerk/nextjs";
 import { AxiosResponse } from "axios";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -84,6 +86,15 @@ function page() {
             handleRegeneration={handleRegenerateSpeech}
           />
         )}
+        <Link
+          href={"/dashboard"}
+          className={buttonVariants({
+            variant: "default",
+            className: "fixed bottom-4 right-4 md:hidden",
+          })}
+        >
+          New Speech
+        </Link>
       </section>
     </>
   );

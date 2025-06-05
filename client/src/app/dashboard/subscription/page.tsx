@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { Separator } from "@/components/ui/separator";
 
 const Page = () => {
   useEffect(() => {
@@ -85,7 +86,13 @@ const Page = () => {
                     step={1}
                     onValueChange={(e) => setTokens(e[0])}
                   />
-                  <span className="text-sm text-neutral-600">{tokens}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-neutral-600">{tokens}</span>
+                    <Separator orientation="vertical" />
+                    <p className="text-sm text-neutral-600 flex items-center">
+                      <span>₹</span> {tokens * 12}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
