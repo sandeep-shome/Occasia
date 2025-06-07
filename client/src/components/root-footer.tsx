@@ -53,8 +53,8 @@ const RootFooter = () => {
             </h2>
 
             <p className="mx-auto mt-4 max-w-sm text-primary/60 dark:text-primary/40">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              maiores ipsum eos temporibus ea nihil.
+              © 2025 Occasia Your AI partner in perfecting every word. Speak
+              smarter. Sound better.
             </p>
 
             <InteractiveHoverButton className="mt-8 mx-auto">
@@ -68,7 +68,7 @@ const RootFooter = () => {
                 <li key={index}>
                   <Link
                     href={link.url}
-                    className="text-primary transition hover:opacity-75"
+                    className="text-muted-foreground transition hover:opacity-75"
                   >
                     {link.titile}
                   </Link>
