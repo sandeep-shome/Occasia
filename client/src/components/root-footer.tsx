@@ -83,7 +83,7 @@ const RootFooter = () => {
                     href={link.url}
                     rel="noreferrer"
                     target="_blank"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-muted-foreground transition hover:opacity-75"
                   >
                     <span className="sr-only">{link.title}</span>
 
