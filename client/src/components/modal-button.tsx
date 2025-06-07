@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ButtonHTMLAttributes, useEffect, useState } from "react";
+import React, { ButtonHTMLAttributes, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import {
   Modal,
@@ -14,7 +14,7 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Slider } from "./ui/slider";
 import { Input } from "./ui/input";
-import { Dices } from "lucide-react";
+import { Dices, Info } from "lucide-react";
 import { useAutoName } from "@/hooks/use-autoname";
 import { useUser } from "@clerk/nextjs";
 import { useGenerateSpeechId } from "@/hooks/use-generate-speech-id";
@@ -24,6 +24,11 @@ import { useRouter } from "next/navigation";
 import LoadingSpinner from "./loading-spinner";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { addSidebarItem } from "@/store/features/sidebar-slice";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type speech = {
   name: string;
@@ -104,16 +109,27 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
                   }
                   className="w-68"
                 />
-                <Button
-                  variant={"outline"}
-                  size={"icon"}
-                  onClick={() => setName(generateName())}
-                >
-                  <Dices className="size-4 text-neutral-600" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      size={"icon"}
+                      onClick={() => setName(generateName())}
+                    >
+                      <Dices className="size-4 text-neutral-600" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Create an random name for your speech</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
               <div className="w-full space-y-3">
-                <Label>Prompt</Label>
+                <LabelWithTip
+                  label="prompt"
+                  tip=" General prompt describes your speech criteria, please
+                        change [value] with actual name, place, etc"
+                />
                 <Textarea
                   value={prompt}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -123,7 +139,11 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
                 />
               </div>
               <div className="space-y-3">
-                <Label>Speech language</Label>
+                <LabelWithTip
+                  label="Speech language"
+                  tip="Describes your speech's language, can't undone after
+                        speech creation"
+                />
                 <div className="w-full flex items-center gap-2 flex-wrap">
                   {languages.map((language) => (
                     <Button
@@ -140,7 +160,10 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
                 </div>
               </div>
               <div className="space-y-3">
-                <Label>Duration</Label>
+                <LabelWithTip
+                  label="prompt"
+                  tip="Describes your speech's duration (1mins~120words)"
+                />
                 <div className="w-full flex items-center gap-2 justify-between">
                   <Slider
                     max={20}
@@ -155,10 +178,8 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
             </div>
           </ModalContent>
           <ModalFooter className="gap-2">
-            <Button variant={"outline"}>Cancel</Button>
             <Button onClick={handleGenerateSpeechId} className="min-w-24">
               {pending ? <LoadingSpinner className="size-4" /> : "Generate"}
-              {/* generate */}
             </Button>
           </ModalFooter>
         </ModalBody>
@@ -166,5 +187,25 @@ function ModalButton({ speech, ...props }: ModalButtonProps) {
     </>
   );
 }
+
+const LabelWithTip = ({ label, tip }: { label: string; tip: string }) => {
+  return (
+    <div className="flex items-center gap-2">
+      <Label htmlFor="suggestion" className="text-right">
+        {label}
+      </Label>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost" size={"icon"}>
+            <Info className="size-4 text-muted-foreground mt-0.5" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{tip}</p>
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  );
+};
 
 export default ModalButton;
