@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 import {
   Dialog,
   DialogContent,
@@ -11,12 +10,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { Copyright, RotateCcw } from "lucide-react";
+import { Copyright, Info, RotateCcw } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Slider } from "./ui/slider";
 import { useAppSelector } from "@/store/store";
 import { toast } from "sonner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface RegenerateDialog {
   suggestions: string;
@@ -63,13 +67,25 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="space-y-3">
-            <Label htmlFor="suggestion" className="text-right">
-              Suggestions
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="suggestion" className="text-right">
+                Suggestions
+              </Label>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size={"icon"}>
+                    <Info className="size-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Add suggestions for improvements</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <Textarea
               id="suggestion"
               value={suggestions}
-              placeholder="Enter on which part you want to improvement"
+              placeholder="eg. suggestions, improvements, add details..."
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setSuggestions(e.target.value)
               }
@@ -77,9 +93,21 @@ const RegenerateDialog: React.FC<RegenerateDialog> = ({
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="suggestion" className="text-right">
-              Duration
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="suggestion" className="text-right">
+                Duration
+              </Label>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size={"icon"}>
+                    <Info className="size-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Change duration of speech (5mins~120 words)</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <div className="w-full flex items-center gap-2 justify-between">
               <Slider
                 max={20}
