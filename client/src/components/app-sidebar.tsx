@@ -1,5 +1,5 @@
 "use client";
-
+// FIXME: Refactor
 import * as React from "react";
 import {
   Sidebar,
@@ -65,7 +65,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <div className="w-full flex items-center justify-between px-2 py-2">
           <Link href={"/"}>
-            <Image src={"logo.svg"} alt="logo" width={90} />
+            <Image
+              src={"logo.svg"}
+              alt="logo"
+              width={90}
+              height={40}
+              className="dark:invert-100"
+            />
           </Link>
         </div>
       </SidebarHeader>
@@ -128,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <div>
             <CardContent className="grid gap-2.5 px-4">
               <Button
-                className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
+                className="w-full shadow-none"
                 size="sm"
                 onClick={() => router.push("/dashboard")}
               >
