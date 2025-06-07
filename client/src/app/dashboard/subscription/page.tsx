@@ -22,8 +22,11 @@ import {
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -48,6 +51,7 @@ const Page = () => {
 
   useEffect(() => {
     if (data && data.tokens > 0) {
+      router.push("/dashboard");
       dispatch(addToken({ tokens: data.tokens }));
       dispatch(addToSubscription({ data: data.subscriptionData }));
       toast(data.message);
