@@ -36,6 +36,7 @@ import { Badge } from "./ui/badge";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const sidebarState = useAppSelector((state) => state.sidebar);
+  const tokenState = useAppSelector((state) => state.token);
   const dispatch = useAppDispatch();
   const user = useUser();
   const pathname = usePathname();
@@ -64,7 +65,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar {...props}>
       <SidebarHeader>
         <div className="w-full flex items-center justify-between px-2 py-2">
-          <Link href={"/"}>
+          <Link href={"/"} className="flex items-center gap-2">
             <Image
               src={"logo.svg"}
               alt="logo"
@@ -72,6 +73,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               height={40}
               className="dark:invert-100"
             />
+            <Badge variant="secondary">Beta</Badge>
           </Link>
         </div>
       </SidebarHeader>
@@ -131,17 +133,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <Card className="shadow-none">
-          <div>
-            <CardContent className="grid gap-2.5 px-4">
-              <Button
-                className="w-full shadow-none"
-                size="sm"
-                onClick={() => router.push("/dashboard")}
-              >
-                New Speech
-              </Button>
-            </CardContent>
-          </div>
+          <CardHeader>
+            <CardTitle>Create speech</CardTitle>
+            <CardDescription>Start a new speech, on one click</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-2.5 px-4">
+            <Button
+              className="w-full shadow-none"
+              size="sm"
+              onClick={() =>
+                router.push(
+                  tokenState.tokens > 0
+                    ? "/dashboard"
+                    : "/dashboard/subscription"
+                )
+              }
+            >
+              {tokenState.tokens > 0 ? "New Speech" : "Purchase tokens"}
+            </Button>
+          </CardContent>
         </Card>
       </SidebarFooter>
       <SidebarRail />
