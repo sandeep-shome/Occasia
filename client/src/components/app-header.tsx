@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { stat } from "fs";
 import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
-import { ModeToggle } from "./theme-toogler";
+import { ModeToggle } from "./mode-toggle";
 
 function AppHeader() {
   const user = useUser();
