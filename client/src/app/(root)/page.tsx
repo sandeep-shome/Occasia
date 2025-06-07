@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
 import TestimonialsSction from "@/components/testimonials-section";
 import PricingSection from "@/components/pricing-section";
+import { useRouter } from "next/navigation";
 
 function page() {
+  const router = useRouter();
   return (
     <>
       <section className="lg:grid lg:place-content-center">
@@ -23,7 +25,11 @@ function page() {
             </p>
 
             <div className="mt-4 flex justify-center gap-4 sm:mt-6">
-              <Button className="" size={"lg"}>
+              <Button
+                className=""
+                size={"lg"}
+                onClick={() => router.push("/dashboard")}
+              >
                 Get started
               </Button>
               <Button className="" size={"lg"} variant={"link"}>
