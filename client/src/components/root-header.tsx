@@ -5,7 +5,7 @@ import { Menu, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { ModeToggle } from "./theme-toogler";
+import { ModeToggle } from "./mode-toggle";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { ShinyButton } from "./magicui/shiny-button";
