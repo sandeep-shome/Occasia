@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { AuroraText } from "@/components/magicui/aurora-text";
 import { Button } from "@/components/ui/button";
