@@ -2,8 +2,6 @@ import Link from "next/link";
 import React from "react";
 import { InteractiveHoverButton } from "./magicui/interactive-hover-button";
 
-// FIXME: Refactor
-
 const RootFooter = () => {
   const data = [
     {
