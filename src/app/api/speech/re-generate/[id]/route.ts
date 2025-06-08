@@ -1,4 +1,5 @@
-import { generateMessage } from "@/lib/inference";
+import { generateMessageUsingHF } from "@/lib/inference";
+import { generateMessageUsingGoogle } from "@/lib/googleAIClient";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -35,7 +36,7 @@ export const PUT = async (
                     - Word Limit: ${(body.duration as number) * 120} words
     `;
 
-    const message = (await generateMessage(content)).content;
+    const message = (await generateMessageUsingGoogle(content)) as string;
 
     const updatedSpeechData = await prisma.speech.update({
       where: {
