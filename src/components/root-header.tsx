@@ -53,7 +53,7 @@ const RootHeader = () => {
   return (
     <header
       className={cn(
-        "bg-white dark:bg-background border-b-1 fixed top-0 left-0 w-full z-50",
+        "bg-white dark:bg-background border-b fixed top-0 left-0 w-full z-50",
         isScrolled ? "" : "border-transparent"
       )}
     >

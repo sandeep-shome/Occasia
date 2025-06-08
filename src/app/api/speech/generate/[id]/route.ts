@@ -1,4 +1,5 @@
-import { generateMessage } from "@/lib/inference";
+import { generateMessageUsingGoogle } from "@/lib/googleAIClient";
+import { generateMessageUsingHF } from "@/lib/inference";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -49,7 +50,7 @@ export async function GET(
                   payloadData.duration * 120
                 }`;
 
-    const message = await generateMessage(content);
+    const message = (await generateMessageUsingGoogle(content)) as string;
 
     // storing speech data
 
@@ -58,7 +59,7 @@ export async function GET(
         id: speechId,
       },
       data: {
-        result: message.content,
+        result: message,
       },
     });
 

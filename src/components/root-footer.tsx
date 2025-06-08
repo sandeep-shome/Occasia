@@ -54,10 +54,11 @@ const RootFooter = () => {
               © 2025 Occasia Your AI partner in perfecting every word. Speak
               smarter. Sound better.
             </p>
-
-            <InteractiveHoverButton className="mt-8 mx-auto">
-              Get started
-            </InteractiveHoverButton>
+            <Link href={"/dashboard"}>
+              <InteractiveHoverButton className="mt-8 mx-auto">
+                Get started
+              </InteractiveHoverButton>
+            </Link>
           </div>
 
           <div className="mt-16 border-t pt-8 sm:flex sm:items-center sm:justify-between lg:mt-24">

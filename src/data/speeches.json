@@ -16,6 +16,16 @@
         "name": "Farewell Speech",
         "public_prompt": "Make a farewell speech for my colleague who is retiring.",
         "internal_prompt": "Generate a respectful and emotionally resonant farewell speech appreciating the colleague's contributions, sharing fond memories, and wishing them well in their next chapter."
+      },
+      {
+        "name": "Anniversary Speech",
+        "public_prompt": "Write a wedding anniversary speech for my parents.",
+        "internal_prompt": "Create a heartfelt and nostalgic speech celebrating the love, journey, and togetherness of parents on their anniversary."
+      },
+      {
+        "name": "Welcome Newborn Speech",
+        "public_prompt": "Write a speech welcoming a newborn into the family.",
+        "internal_prompt": "Generate a warm and joyful speech to welcome a newborn, expressing love, blessings, and excitement for the newest member of the family."
       }
     ]
   },
@@ -36,6 +46,16 @@
         "name": "Promotion Announcement",
         "public_prompt": "Generate a short speech announcing my promotion to team lead.",
         "internal_prompt": "Write a grateful and motivational speech acknowledging the promotion, appreciating team support, and expressing enthusiasm for the new responsibilities."
+      },
+      {
+        "name": "Retirement Speech",
+        "public_prompt": "Write a retirement speech as a senior executive.",
+        "internal_prompt": "Create a thoughtful and appreciative speech reflecting on years of service, expressing gratitude, and leaving a legacy message for peers and juniors."
+      },
+      {
+        "name": "Conference Keynote",
+        "public_prompt": "Create a keynote speech for a tech conference.",
+        "internal_prompt": "Write an insightful and visionary keynote speech addressing innovation, challenges, and future opportunities in the technology sector."
       }
     ]
   },
@@ -51,6 +71,16 @@
         "name": "Overcoming Failure",
         "public_prompt": "Make a speech about overcoming failure and trying again.",
         "internal_prompt": "Write an emotionally powerful and inspiring speech that talks about the value of failure as a learning opportunity and motivates the audience to persevere."
+      },
+      {
+        "name": "Morning Assembly Talk",
+        "public_prompt": "Write a motivational speech for school morning assembly.",
+        "internal_prompt": "Create a short and inspiring speech suitable for a morning school assembly, focusing on values, discipline, and a positive mindset."
+      },
+      {
+        "name": "Sports Motivation Speech",
+        "public_prompt": "Generate a motivational speech for athletes before a big game.",
+        "internal_prompt": "Write a high-energy, inspiring speech encouraging athletes to give their best, believe in their training, and play with heart and spirit."
       }
     ]
   },
@@ -71,6 +101,11 @@
         "name": "Welcome Speech",
         "public_prompt": "Write a welcome speech for a school annual day function.",
         "internal_prompt": "Create a warm, respectful, and engaging welcome speech that greets the audience, dignitaries, and sets the tone for a celebratory school event."
+      },
+      {
+        "name": "Induction Ceremony Speech",
+        "public_prompt": "Generate a speech for welcoming new members at an induction ceremony.",
+        "internal_prompt": "Write a formal and encouraging speech to welcome new members, introduce the values of the group, and set a positive tone for their journey."
       }
     ]
   },
@@ -86,6 +121,11 @@
         "name": "Roast Speech",
         "public_prompt": "Write a playful roast speech for a friend's birthday party.",
         "internal_prompt": "Craft a light-hearted roast that’s funny, teasing, and warm-spirited without being offensive. Include anecdotes and inside jokes that bring laughter."
+      },
+      {
+        "name": "Funny Office Party Speech",
+        "public_prompt": "Create a humorous speech for the annual office party.",
+        "internal_prompt": "Generate a funny and enjoyable speech for a professional gathering that brings out the lighter side of work life and encourages good vibes."
       }
     ]
   },
@@ -106,6 +146,11 @@
         "name": "Annual Day Report Speech",
         "public_prompt": "Create a principal’s speech to present the school’s annual report.",
         "internal_prompt": "Write a formal and informative speech for a principal presenting the school’s yearly academic and extracurricular achievements, including stats and future goals."
+      },
+      {
+        "name": "Library Inauguration Speech",
+        "public_prompt": "Generate a speech for the inauguration of a school library.",
+        "internal_prompt": "Write a thoughtful and informative speech that highlights the value of reading and the significance of the new library for students and faculty."
       }
     ]
   },
@@ -126,6 +171,11 @@
         "name": "Social Awareness Speech",
         "public_prompt": "Create a speech to raise awareness about climate change.",
         "internal_prompt": "Write an impactful and educational speech on climate change, emphasizing urgency, solutions, and the audience’s role in making a difference."
+      },
+      {
+        "name": "Women Empowerment Speech",
+        "public_prompt": "Write a speech on women empowerment for a school event.",
+        "internal_prompt": "Generate an inspiring and respectful speech emphasizing the importance of gender equality, achievements of women, and the need for empowerment in all spheres of life."
       }
     ]
   },
@@ -145,7 +195,37 @@
       {
         "name": "Fantasy World Leadership Speech",
         "public_prompt": "Generate a speech by a queen of an elven kingdom rallying troops before battle.",
-        "internal_prompt": "Create a majestic, poetic, and inspiring war-time speech by a fantasy queen calling her elven army to defend their kingdom with honor and courage."
+        "internal_prompt": "Create an epic and poetic speech full of fantasy world charm, inspiring courage and unity before a mythical battle."
+      },
+      {
+        "name": "Superhero Farewell Speech",
+        "public_prompt": "Write a speech by a superhero retiring from duty.",
+        "internal_prompt": "Generate a dramatic and emotional farewell speech by a superhero reflecting on their journey, sacrifices, and hopes for the future."
+      }
+    ]
+  },
+  {
+    "category": "Spiritual & Mindful 🧘",
+    "speechs": [
+      {
+        "name": "Meditation Introduction",
+        "public_prompt": "Create a speech to introduce meditation to beginners.",
+        "internal_prompt": "Generate a calm and reassuring speech that explains the basics of meditation, its benefits, and how to get started."
+      },
+      {
+        "name": "Spiritual Awakening Talk",
+        "public_prompt": "Write a speech on the journey of spiritual awakening.",
+        "internal_prompt": "Compose a deep and reflective speech that touches on personal transformation, inner peace, and connecting with a higher purpose."
+      }
+    ]
+  },
+  {
+    "category": "Custom ➕",
+    "speechs": [
+      {
+        "name": "Custom Speech",
+        "public_prompt": "Write a speech on the journey of...",
+        "internal_prompt": "Compose a deep and reflective speech that touches on personal transformation on the content provided"
       }
     ]
   }

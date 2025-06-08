@@ -34,7 +34,7 @@ function AppHeader() {
   }, [user.isLoaded]);
   return (
     <>
-      <header className="flex justify-between sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
+      <header className="flex justify-between sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4 z-50">
         <div className="flex items-center gap-2">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
@@ -44,7 +44,7 @@ function AppHeader() {
             <Skeleton className="w-12 h-5 rounded-full" />
           ) : (
             <Link
-              href="/dashboard/subscription"
+              href="/dashboard/billing"
               className={cn(
                 "border rounded-full flex items-center gap-1 px-2 py-0.5",
                 state.tokens > 0

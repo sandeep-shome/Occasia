@@ -5,8 +5,8 @@
       "url": "#",
       "items": [
         {
-          "title": "Subscription",
-          "url": "/dashboard/subscription"
+          "title": "Billing & credits",
+          "url": "/dashboard/billing"
         },
         {
           "title": "Settings",

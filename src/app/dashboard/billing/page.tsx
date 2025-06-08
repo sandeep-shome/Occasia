@@ -65,7 +65,9 @@ const Page = () => {
   return (
     <>
       <div className="w-full flex items-center justify-between mb-10">
-        <h3 className="text-sm font-semibold text-neutral-700">Subscription</h3>
+        <h3 className="text-sm font-semibold text-muted-foreground">
+          Subscription
+        </h3>
         <Dialog>
           <DialogTrigger asChild>
             <Button className="min-w-32">Purchase tokens</Button>

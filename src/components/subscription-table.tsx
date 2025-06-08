@@ -66,9 +66,9 @@ const SubscriptionTable = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="">Invoice</TableHead>
-            <TableHead>Tokens</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead className="text-center">Tokens</TableHead>
+            <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Date</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
@@ -99,11 +99,11 @@ const SubscriptionTable = () => {
             subscriptionState.data.map((invoice, index) => (
               <TableRow key={index}>
                 <TableCell className="font-medium">{invoice.id}</TableCell>
-                <TableCell>{invoice.tokens}</TableCell>
-                <TableCell>
+                <TableCell className="text-center">{invoice.tokens}</TableCell>
+                <TableCell className="text-center">
                   {invoice.successful ? "Success" : "Failed"}
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                   {invoice.createdAt.toString().split("T")[0]}
                 </TableCell>
                 <TableCell className="text-right">{invoice.amount}</TableCell>

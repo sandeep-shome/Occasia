@@ -3,6 +3,7 @@ import { ShinyButton } from "./magicui/shiny-button";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 const PricingSection = () => {
   return (
@@ -54,7 +55,9 @@ const PricingSection = () => {
             <h4>
               <strong className="text-4xl font-bold">$0.14</strong> / Speech
             </h4>
-            <Button className="mt-4 w-full">Get started</Button>
+            <Link href={"/dashboard"}>
+              <Button className="mt-4 w-full">Get started</Button>
+            </Link>
             <span className="text-center text-sm text-neutral-500 dark:text-white/40">
               Lorem ipsum dolor sit amet consectetur. Lorem, ipsum dolor.
             </span>

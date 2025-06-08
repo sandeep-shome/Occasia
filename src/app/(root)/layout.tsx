@@ -7,7 +7,7 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
       <RootHeader />
-      <ScrollProgress className="top-[60px]" />
+      <ScrollProgress className="top-[55px]" />
       <main className="pt-20 w-full mx-auto max-w-screen-xl min-h-screen">
         {children}
       </main>
