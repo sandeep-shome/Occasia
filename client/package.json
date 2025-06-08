@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.19.1",
+    "@google/genai": "^1.4.0",
     "@huggingface/inference": "^3.13.1",
     "@prisma/client": "^6.7.0",
     "@radix-ui/react-collapsible": "^1.1.10",
