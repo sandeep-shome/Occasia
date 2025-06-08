@@ -143,9 +143,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               size="sm"
               onClick={() =>
                 router.push(
-                  tokenState.tokens > 0
-                    ? "/dashboard"
-                    : "/dashboard/subscription"
+                  tokenState.tokens > 0 ? "/dashboard" : "/dashboard/billing"
                 )
               }
             >
