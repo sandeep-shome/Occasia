@@ -55,7 +55,7 @@ const PricingSection = () => {
             <h4>
               <strong className="text-4xl font-bold">$0.14</strong> / Speech
             </h4>
-            <Link href={"/dashboard"}>
+            <Link href={"/dashboard"} className="w-full">
               <Button className="mt-4 w-full">Get started</Button>
             </Link>
             <span className="text-center text-sm text-neutral-500 dark:text-white/40">
