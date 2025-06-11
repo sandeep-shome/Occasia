@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Logo]("./public/logo.svg)
 
-## Getting Started
+## Occasia 🚀
 
-First, run the development server:
+#### Occasia is your smart AI-powered speech writing companion, designed to craft the perfect words for every occasion. Whether it’s a wedding toast, an inspiring professional address, a heartfelt farewell, or a light, humorous note for a friend — Occasia generates thoughtful, personalized speeches tailored to your style, mood, and purpose.
+
+#### With a simple, intuitive interface and customizable options, Occasia lets you create speeches that resonate — saving you time, effort, and writer’s block. Just choose your occasion, provide key details, and let our advanced AI do the magic.
+
+#### From casual moments to life’s biggest milestones — Occasia makes every word count.
+
+## Features
+
+- AI-Generated Speeches
+- Professional & Humanistic Tone
+- Light/Dark Mode Toggle
+- Regeneration Option
+- Secure Transactions via Razorpay
+- Cross-Platform Compatibility
+- Mobile Responsive Design
+- SEO Optimized
+- Vibrant & Minimal Design Aesthetic
+- Secure Authentication via Clerk
+
+## Tech Stack
+
+**Client:** React, Next, Redux, TailwindCSS, Shadcn UI, Magic UI, Aceternity UI
+
+**Server:** Node, Next server
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://link-to-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+ cd occasia
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies
 
-## Learn More
+```bash
+ npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+To run this project, you will need to add the following environment variables to your .env file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`CLERK_SECRET_KEY`
+
+`DATABASE_URL`
+
+`WEBHOOK_SECRET`
+
+`NODE_ENV`
+
+`RAZORPAY_KEY_ID`
+
+`RAZORPAY_KEY_SECRET`
+
+`NEXT_PUBLIC_RAZORPAY_KEY_ID`
+
+`GOOGLE_GENAI_API_KEY`
+
+## Demo
+
+Insert gif or link to demo
+
+## Screenshots
+
+![App Screenshot]()
+
+## Support
+
+For support, email sandeepshome.dev@gmail.com
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
