@@ -81,12 +81,17 @@ Insert gif or link to demo
 
 ## Screenshots
 
-![App Screenshot](project\screenshots\landing-page-light.png)
-![App Screenshot](project\screenshots\landing-page-dark.png)
-![App Screenshot](project\screenshots\speech-template.png)
-![App Screenshot](project\screenshots\speech.png)
-![App Screenshot](project\screenshots\regeneration.png)
-![App Screenshot](project\screenshots\billing.png)
+![App Screenshot](./public//screenshots/landing-page-light.png)
+
+![App Screenshot](./public//screenshots/landing-page-dark.png)
+
+![App Screenshot](./public//screenshots/speech-template.png)
+
+![App Screenshot](./public//screenshots/speech.png)
+
+![App Screenshot](./public//screenshots/regeneration.png)
+
+![App Screenshot](./public//screenshots/billing.png)
 
 ## Support
 
