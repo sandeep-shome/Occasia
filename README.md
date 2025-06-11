@@ -1,4 +1,4 @@
-![Logo]("./public/logo.svg)
+![Logo](\public\logo.svg)
 
 ## Occasia 🚀
 
@@ -81,7 +81,12 @@ Insert gif or link to demo
 
 ## Screenshots
 
-![App Screenshot]()
+![App Screenshot](project\screenshots\landing-page-light.png)
+![App Screenshot](project\screenshots\landing-page-dark.png)
+![App Screenshot](project\screenshots\speech-template.png)
+![App Screenshot](project\screenshots\speech.png)
+![App Screenshot](project\screenshots\regeneration.png)
+![App Screenshot](project\screenshots\billing.png)
 
 ## Support
 
