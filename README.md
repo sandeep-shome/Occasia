@@ -77,7 +77,7 @@ To run this project, you will need to add the following environment variables to
 
 ## Demo
 
-Insert gif or link to demo
+[Demo video](https://drive.google.com/file/d/1xIaR6CUgzRCWMfYapmnHZEEPh-fsAfwA/view?usp=sharing)
 
 ## Screenshots
 
@@ -99,4 +99,8 @@ For support, email sandeepshome.dev@gmail.com
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## Authors
+
+- [@SandeepShome](https://github.com/sandeep-shome)
