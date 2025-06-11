@@ -1,4 +1,4 @@
-![Logo](\public\logo.svg)
+![Logo](./public/logo.svg)
 
 ## Occasia 🚀
 
