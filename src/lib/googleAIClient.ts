@@ -23,10 +23,8 @@ export const generateMessageUsingGoogle = async (
         `,
       },
     });
-    console.log(response.text);
     return response.text as string;
   } catch (err) {
-    console.log(err);
     return "err: speech not generated";
   }
 };
