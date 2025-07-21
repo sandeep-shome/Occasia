@@ -15,9 +15,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
-              nisi. Natus, provident accusamus impedit minima harum corporis
-              iusto.
+              Occasia uses advanced AI to craft powerful, personalized speeches for any occasion—weddings, events, keynotes, or toasts—saving you hours of writing and stress.
             </p>
 
             <div className="mt-4 flex justify-center gap-4 sm:mt-6">
